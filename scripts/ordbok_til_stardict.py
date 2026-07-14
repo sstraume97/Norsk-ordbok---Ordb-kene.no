@@ -64,7 +64,7 @@ def _render_examples(examples: list[str]) -> str:
     if not examples:
         return ""
     ex = "; ".join(_escape(e) for e in examples)
-    return f" <i>({ex})</i>"
+    return f"<br><b>Eksempel</b><br><i>{ex}</i>"
 
 
 def _render_sense(sense: Sense) -> str:
@@ -104,21 +104,34 @@ def _render_inflection_tables(article: Article) -> str:
     return "".join(_render_inflection_table(lemma, t, show_label) for lemma, t in article.inflection_tables)
 
 
+def _render_expression_inline(expr: Expression) -> str:
+    name = f"<b>{html.escape(expr.lemma)}</b>"
+    senses_html = _render_senses(expr.senses)
+    return f"{name}<br>{senses_html}" if senses_html else name
+
+
+def _render_expressions_section(article: Article) -> str:
+    items = [_render_expression_inline(e) for e in article.expressions if e.lemma]
+    if not items:
+        return ""
+    return "<b>Faste uttrykk</b><br>" + "<br>".join(items)
+
+
 def _render_definition(article: Article, compounds: dict[str, list[str]]) -> str:
     parts = []
     if article.word_class:
         parts.append(f"<b>{html.escape(article.word_class)}</b>")
     if article.pronunciation:
-        parts.append(f"<i>uttale:</i> {_escape(article.pronunciation)}")
+        parts.append(f"<b>Uttale:</b> {_escape(article.pronunciation)}")
     if article.etymology:
-        parts.append(f"<i>opphav:</i> {_escape(article.etymology)}")
+        parts.append(f"<b>Opphav:</b> {_escape(article.etymology)}")
 
     comp = []
     for lemma in article.lemmas:
         comp.extend(compounds.get(lemma.lower(), []))
     comp = list(dict.fromkeys(comp))
     if comp:
-        parts.append(f"<i>sammensetning:</i> {_escape(' / '.join(comp))}")
+        parts.append(f"<b>Sammensetning:</b> {_escape(' / '.join(comp))}")
 
     tables_html = _render_inflection_tables(article)
     if tables_html:
@@ -126,11 +139,10 @@ def _render_definition(article: Article, compounds: dict[str, list[str]]) -> str
 
     senses_html = _render_senses(article.senses)
     if senses_html:
-        parts.append(senses_html)
-    if article.expressions:
-        names = ", ".join(html.escape(e.lemma) for e in article.expressions if e.lemma)
-        if names:
-            parts.append(f"<i>faste uttrykk:</i> {names}")
+        parts.append(f"<b>Betydning og bruk</b>{senses_html}")
+    expr_html = _render_expressions_section(article)
+    if expr_html:
+        parts.append(expr_html)
     return "<br>".join(p for p in parts if p)
 
 

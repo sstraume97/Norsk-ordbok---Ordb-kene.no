@@ -61,6 +61,36 @@ ABBREV = {
 }
 
 
+# Fagfelt-koder ("domain") brukt til å sette emneetiketter foran
+# forklaringer, f.eks. "i botanikk: ..." eller "i den katolske kirke:
+# ...". Koder med prefiks "i_"/"o_" kombineres med "i "/"om " + oppslag
+# (uten prefiks); koder uten prefiks settes inn direkte i setningsmalen.
+# Satt sammen empirisk fra hyppigst brukte koder i kildedataene - ukjente
+# koder faller tilbake til samme transkripsjon som `_fallback_entity()`.
+DOMAIN_NAMES = {
+    "bot": "botanikk", "zool": "zoologi", "mus": "musikk", "idr": "idrett",
+    "filos": "filosofi", "rel": "religion", "kjem": "kjemi", "mat": "matematikk",
+    "gramm": "grammatikk", "fys": "fysikk", "astron": "astronomi", "jus": "jus",
+    "jur": "jus", "med": "medisin", "mil": "militærvesen", "bibl": "bibelen",
+    "pol": "politikk", "myt": "mytologi", "biol": "biologi", "bio": "biologi",
+    "fysiol": "fysiologi", "geol": "geologi", "psyk": "psykologi", "anat": "anatomi",
+    "typ": "typografi", "teol": "teologi", "dial": "dialekt",
+    "spraakv": "språkvitenskap", "gr_myt": "gresk mytologi",
+    "norr_myt": "norrøn mytologi", "norr_forh": "norrøne forhold",
+    "tekn_s": "teknikken", "kat_e": "katolske",
+}
+
+
+def _render_domain(domain_id: str) -> str:
+    if domain_id.startswith("i_"):
+        code = domain_id[2:]
+        return f"i {DOMAIN_NAMES.get(code, _fallback_entity(code))}"
+    if domain_id.startswith("o_"):
+        code = domain_id[2:]
+        return f"om {DOMAIN_NAMES.get(code, _fallback_entity(code))}"
+    return DOMAIN_NAMES.get(domain_id, _fallback_entity(domain_id))
+
+
 def _fallback_entity(entity_id: str) -> str:
     """Best-effort formatering av entitets-id-er som ikke finnes i
     ABBREV: `aa`/`ae`/`oe` transkriberes til `å`/`æ`/`ø`, og understrek
@@ -205,11 +235,26 @@ def resolve_refs(text: str, resolver: Callable[[int, str], str]) -> str:
     return _REF_RE.sub(lambda m: resolver(int(m.group(1)), m.group(2)), text)
 
 
+# Elementtyper som er strukturelt identiske med "entity" (rent
+# id-oppslag mot ABBREV/fallback) - bare ulike semantiske kategorier
+# (språk, kryssreferanseord, grammatisk term, retorisk term, tidsuttrykk).
+_ENTITY_LIKE_TYPES = {"entity", "language", "relation", "grammar", "rhetoric", "temporal"}
+
+
 def _render_item(item: dict) -> str:
     t = item.get("type_")
-    if t == "entity":
+    if t in _ENTITY_LIKE_TYPES:
         entity_id = item.get("id", "")
-        return ABBREV.get(entity_id, _fallback_entity(entity_id))
+        resolved = ABBREV.get(entity_id, _fallback_entity(entity_id))
+        # Språkforkortelser ("language") mangler ofte avsluttende punktum
+        # i kildedataene (f.eks. id "eng" i stedet for "eng."), i
+        # motsetning til samme forkortelse brukt som "entity" i
+        # etymologi. Legg til punktum konsekvent for lesbarhet.
+        if t == "language" and resolved and not resolved.endswith("."):
+            resolved += "."
+        return resolved
+    if t == "domain":
+        return _render_domain(item.get("id", ""))
     if t == "usage":
         return item.get("text", "")
     if t == "article_ref":
@@ -225,7 +270,12 @@ def _render_item(item: dict) -> str:
         return text
     if t == "lemma":
         return item.get("lemma", "")
-    # Ukjent elementtype: bruk tekst/id hvis det finnes, ellers tomt.
+    if t in ("pronunciation_guide", "quote_inset"):
+        return _render_content(item.get("content", ""), item.get("items", []))
+    if t == "fraction":
+        return f"{item.get('numerator', '')}/{item.get('denominator', '')}"
+    # Ukjent elementtype (f.eks. superscript/subscript, som allerede har
+    # et lesbart "text"-felt): bruk tekst/id hvis det finnes, ellers tomt.
     return item.get("text") or item.get("id") or ""
 
 
