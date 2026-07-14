@@ -469,13 +469,23 @@ def iterate_articles(tar_path: Path) -> Iterator[Article]:
 
 
 def load_compound_analysis(tar_path: Path) -> dict[str, list[str]]:
-    """Leser `leddanalyse.txt` fra en Norsk Ordbank-tar.gz og bygger en
-    oppslagstabell fra lemma (små bokstaver) til formaterte
+    """Leser sammensetningsanalyse-filen fra en Norsk Ordbank-tar.gz og
+    bygger en oppslagstabell fra lemma (små bokstaver) til formaterte
     sammensetningsanalyser (f.eks. "troll + mann"). Enkle former uten
-    forledd/etterledd ("simplex") hoppes over."""
+    forledd/etterledd ("simplex") hoppes over.
+
+    Filnavnet varierer mellom målformer (f.eks. `leddanalyse.txt` for
+    bokmål 2005, `leddanalyse_2012.txt` for nynorsk 2012), så vi finner
+    medlemmet ved å lete etter "leddanalyse" i navnet i stedet for å
+    anta én bestemt filnavnsform."""
     compounds: dict[str, list[str]] = defaultdict(list)
     with tarfile.open(tar_path, mode="r:gz") as tar:
-        f = tar.extractfile("leddanalyse.txt")
+        member_name = next(
+            (m.name for m in tar.getmembers() if "leddanalyse" in m.name.lower()), None
+        )
+        if member_name is None:
+            return {}
+        f = tar.extractfile(member_name)
         if f is None:
             return {}
         reader = csv.DictReader(io.TextIOWrapper(f, encoding="iso-8859-1"), delimiter="\t")
