@@ -80,6 +80,12 @@ berikelse - ikke kjernedata. Lisens: CC-BY 4.0
    - Faste uttrykk (idiomer, f.eks. "slå an" under "slå") får sitt eget
      oppslag med egen definisjon, siden de har en annen betydning enn
      grunnordet.
+   - `assets/Bokmål-ikon.png`/`assets/Nynorsk-ikon.png` kopieres inn i
+     pakken som `bm.png`/`nn.png` (samme filnavn som `.ifo`-filen) - dette
+     er hvordan GoldenDict (og goldendict-ng) gjenkjenner et eget ikon
+     per ordbok, slik at de to blir enklere å skille fra hverandre i
+     dictionary-lista. Beste innsats: mangler ikonfilen, pakkes ordboka
+     uten ikon i stedet for at bygget feiler.
 4. Ferdige ordbøker zippes til `dist/bm-stardict.zip` og
    `dist/nn-stardict.zip`, og publiseres som en
    [GitHub Release](../../releases) merket med datoen (via `gh release

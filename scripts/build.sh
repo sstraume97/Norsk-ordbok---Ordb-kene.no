@@ -20,6 +20,12 @@ set -euo pipefail
 
 declare -A NAMES=( ["bm"]="Bokmålsordboka" ["nn"]="Nynorskordboka" )
 
+# Ikon lagt ved i StarDict-pakken - GoldenDict (og goldendict-ng) viser
+# dette automatisk som ordbokens ikon når filen har samme filnavn som
+# .ifo-filen (f.eks. bm.png ved siden av bm.ifo/bm.idx/bm.dict.dz/bm.syn).
+# Kilde: https://xiaoyifang.github.io/goldendict-ng/dictformats/
+declare -A ICONS=( ["bm"]="assets/Bokmål-ikon.png" ["nn"]="assets/Nynorsk-ikon.png" )
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/lib_ordbank.sh"
 
@@ -76,6 +82,13 @@ for d in bm nn; do
         --read-format=Tabfile --write-format=Stardict \
         --write-options 'dictzip=True' \
         --name "${navn}"
+
+    if [ -f "${ICONS[$d]}" ]; then
+        cp "${ICONS[$d]}" "tmp/${d}-stardict/${d}.png"
+        echo "   la til ikon: ${ICONS[$d]} -> ${d}.png"
+    else
+        echo "   fant ikke ${ICONS[$d]} - pakker uten ikon."
+    fi
 
     echo "== ${d}: zipper =="
     (cd "tmp/${d}-stardict" && zip -q -r "../../dist/${d}-stardict.zip" .)
