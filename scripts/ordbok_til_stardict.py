@@ -55,6 +55,10 @@ from ordbok_parser import (
 )
 
 
+def _cell(text: str) -> str:
+    return html.escape(text) if text else "-"
+
+
 def _ref_resolver(article_id: int, text: str) -> str:
     # StarDict-lesere har ingen felles standard for interne kryssoppslag,
     # så kryssreferanser vises i kursiv i stedet for som klikkbar lenke.
@@ -93,7 +97,36 @@ _TH_STYLE = 'style="border:1px solid #999;background:#f0f0f0;padding:3px 10px;te
 _TD_STYLE = 'style="border:1px solid #999;padding:3px 10px;text-align:center"'
 
 
+def _render_adj_table(table: InflectionTable) -> str:
+    pos_cols = [c for c in table.positiv_cols if any(c in row.positiv for row in table.adj_rows)]
+    sup_cols = [c for c in table.superlativ_cols if any(c in row.superlativ for row in table.adj_rows)]
+    has_cmp = any(row.komparativ for row in table.adj_rows)
+
+    top = ""
+    if pos_cols:
+        top += f'<th {_TH_STYLE} colspan="{len(pos_cols)}">positiv</th>'
+    if has_cmp:
+        top += f'<th {_TH_STYLE} rowspan="2">komparativ</th>'
+    if sup_cols:
+        top += f'<th {_TH_STYLE} colspan="{len(sup_cols)}">superlativ</th>'
+
+    sub = "".join(f'<th {_TH_STYLE}><i>{html.escape(c)}</i></th>' for c in pos_cols)
+    sub += "".join(f'<th {_TH_STYLE}><i>{html.escape(c)}</i></th>' for c in sup_cols)
+
+    rows_html = []
+    for row in table.adj_rows:
+        cells = "".join(f'<td {_TD_STYLE}>{_cell(row.positiv.get(c, ""))}</td>' for c in pos_cols)
+        if has_cmp:
+            cells += f'<td {_TD_STYLE}>{_cell(row.komparativ)}</td>'
+        cells += "".join(f'<td {_TD_STYLE}>{_cell(row.superlativ.get(c, ""))}</td>' for c in sup_cols)
+        rows_html.append(f"<tr>{cells}</tr>")
+
+    return f'<table {_TABLE_STYLE}><tr>{top}</tr><tr>{sub}</tr>{"".join(rows_html)}</table>'
+
+
 def _render_inflection_table(lemma: str, table: InflectionTable, show_label: bool) -> str:
+    if table.kind == "adj":
+        return _render_adj_table(table)
     label = f"<i>{html.escape(lemma)}:</i> " if show_label else ""
     if table.kind == "grid":
         top = "".join(

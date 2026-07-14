@@ -1,0 +1,24 @@
+name: Kjør tester
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut repo
+        uses: actions/checkout@v4
+
+      - name: Sett opp Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer pytest
+        run: pip install pytest
+
+      - name: Kjør tester
+        run: python3 -m pytest tests/ -v

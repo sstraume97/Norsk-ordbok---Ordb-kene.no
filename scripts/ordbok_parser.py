@@ -154,6 +154,18 @@ class InflectionForm:
 
 
 @dataclass
+class AdjRow:
+    """Én bøyingsrad for ett adjektiv-lemma (se ordbokene.nos
+    bøyingstabell: positiv - hankjønn/hunkjønn, intetkjønn, bestemt
+    form, flertall - pluss komparativ og superlativ ubestemt/bestemt)."""
+
+    lemma: str
+    positiv: dict[str, str] = field(default_factory=dict)
+    komparativ: str = ""
+    superlativ: dict[str, str] = field(default_factory=dict)
+
+
+@dataclass
 class InflectionTable:
     """`kind == "grid"`: substantiv-tabell som på ordbokene.no - to
     kolonnegrupper (`col_groups`, f.eks. entall/flertall), hver med de
@@ -161,15 +173,23 @@ class InflectionTable:
     form). `cells[(gruppe, underkolonne)]` er en liste med bøyde former
     (mer enn én ved sideformer, f.eks. "håpa, håpene"). `article` er
     ubestemt kjønnsartikkel (en/ei/et) satt foran ubestemt entallsform,
-    hvis kjent. `kind == "list"`: enkel (merkelapp, bøyd form)-liste,
-    brukt for ordklasser uten en naturlig 2D-tabell (verb, adjektiv
-    m.m.)."""
+    hvis kjent.
+
+    `kind == "adj"`: adjektivbøying - én rad per lemma (`adj_rows`) med
+    positiv (`positiv_cols`), komparativ (enkeltverdi) og superlativ
+    (`superlativ_cols`, ubestemt/bestemt).
+
+    `kind == "list"`: enkel (merkelapp, bøyd form)-liste, brukt for
+    ordklasser uten en egen tabellform (pronomen, determinativ m.m.)."""
 
     kind: str
     col_groups: list[str] = field(default_factory=list)
     sub_cols: list[str] = field(default_factory=list)
     cells: dict[tuple[str, str], list[str]] = field(default_factory=dict)
     article: Optional[str] = None
+    adj_rows: list[AdjRow] = field(default_factory=list)
+    positiv_cols: list[str] = field(default_factory=list)
+    superlativ_cols: list[str] = field(default_factory=list)
     rows: list[tuple[str, str]] = field(default_factory=list)
 
 
@@ -418,6 +438,54 @@ def _inflection_forms(lemma_obj: dict) -> list[InflectionForm]:
 ARTICLE_BY_GENDER = {"Masc": "en", "Fem": "ei", "Neuter": "et", "Masc/Fem": "en"}
 
 
+def _collect_exact(forms: list[InflectionForm], wanted: set[str]) -> str:
+    """Samler alle bøyde former som har PRESIS denne tag-kombinasjonen
+    (rekkefølge-uavhengig), som sideformer i én kommaseparert streng
+    (f.eks. flere aksepterte a-infinitiver i nynorsk)."""
+    out: list[str] = []
+    for infl in forms:
+        if set(infl.tags) == wanted and infl.word_form not in out:
+            out.append(infl.word_form)
+    return ", ".join(out)
+
+
+def _build_adj_row(lemma: str, forms: list[InflectionForm]) -> Optional[AdjRow]:
+    """Bygger én bøyingsrad for et adjektiv-lemma. Paradigmet er verifisert
+    mot ekte data (f.eks. https://ord.uib.no/bm/article/14683.json,
+    "fin"): Pos+Masc/Fem+Ind+Sing, Pos+Neuter+Ind+Sing, Pos+Def+Sing,
+    Pos+Plur, Cmp, Sup+Ind, Sup+Def."""
+    if not forms:
+        return None
+
+    positiv = {}
+    masc_fem = _collect_exact(forms, {"Pos", "Masc/Fem", "Ind", "Sing"})
+    if masc_fem:
+        positiv["hankjønn/hunkjønn"] = masc_fem
+    neuter = _collect_exact(forms, {"Pos", "Neuter", "Ind", "Sing"})
+    if neuter:
+        positiv["intetkjønn"] = neuter
+    definite = _collect_exact(forms, {"Pos", "Def", "Sing"})
+    if definite:
+        positiv["bestemt form"] = definite
+    plural = _collect_exact(forms, {"Pos", "Plur"})
+    if plural:
+        positiv["flertall"] = plural
+
+    komparativ = _collect_exact(forms, {"Cmp"})
+
+    superlativ = {}
+    sup_ind = _collect_exact(forms, {"Sup", "Ind"})
+    if sup_ind:
+        superlativ["ubestemt"] = sup_ind
+    sup_def = _collect_exact(forms, {"Sup", "Def"})
+    if sup_def:
+        superlativ["bestemt"] = sup_def
+
+    if not positiv and not komparativ and not superlativ:
+        return None
+    return AdjRow(lemma=lemma, positiv=positiv, komparativ=komparativ, superlativ=superlativ)
+
+
 def _build_inflection_table(
     word_class_code: str, forms: list[InflectionForm], gender_code: Optional[str] = None
 ) -> Optional[InflectionTable]:
@@ -481,12 +549,32 @@ def parse_article(raw: dict) -> Article:
     # eget fullstendige bøyingsparadigme som ikke skal blandes sammen.
     inflection_forms: list[InflectionForm] = []
     inflection_tables: list[tuple[str, InflectionTable]] = []
+    adj_rows: list[AdjRow] = []
     for l in lemma_objs:
         forms = _inflection_forms(l)
         inflection_forms.extend(forms)
-        table = _build_inflection_table(word_class_code, forms, _gender_code(l))
-        if table:
-            inflection_tables.append((l.get("lemma", ""), table))
+        if word_class_code == "ADJ":
+            # Adjektivbøying vises som én tabell med én rad per
+            # stavemåte (som ordbokene.no), i motsetning til substantiv
+            # som får en egen tabell per stavemåte.
+            row = _build_adj_row(l.get("lemma", ""), forms)
+            if row:
+                adj_rows.append(row)
+        else:
+            table = _build_inflection_table(word_class_code, forms, _gender_code(l))
+            if table:
+                inflection_tables.append((l.get("lemma", ""), table))
+
+    if adj_rows:
+        inflection_tables.append((
+            "",
+            InflectionTable(
+                kind="adj",
+                adj_rows=adj_rows,
+                positiv_cols=["hankjønn/hunkjønn", "intetkjønn", "bestemt form", "flertall"],
+                superlativ_cols=["ubestemt", "bestemt"],
+            ),
+        ))
 
     body = raw.get("body") or {}
     senses = _render_definitions(body.get("definitions", []))

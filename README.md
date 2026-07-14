@@ -27,13 +27,19 @@ definisjoner, eksempler, faste uttrykk/idiomer, bøyingsformer,
 kryssreferanser) ligger i `scripts/ordbok_parser.py`. Dette gir samme
 detaljnivå som selve ordbokene.no:
 
-- **Bøyingstabell**, ikke bare en flat liste: substantiv får en tabell med
-  entall/flertall som kolonnegrupper og ubestemt/bestemt form som
-  underkolonner (som på ordbokene.no, inkl. kjønnsartikkel foran ubestemt
-  entallsform, f.eks. "et håp"), andre ordklasser (verb, adjektiv m.m.)
-  får en enkel merkelapp/bøyd-form-liste. Ordklassenavn og
-  bøyingsmerkelapper er hentet fra UiBs offisielle kodelister
-  (`word_class.json`/`sub_word_class.json`).
+- **Bøyingstabell**, ikke bare en flat liste:
+  - Substantiv får en tabell med entall/flertall som kolonnegrupper og
+    ubestemt/bestemt form som underkolonner (inkl. kjønnsartikkel foran
+    ubestemt entallsform, f.eks. "et håp").
+  - Adjektiv får en tabell med positiv (hankjønn/hunkjønn, intetkjønn,
+    bestemt form, flertall), komparativ og superlativ (ubestemt/bestemt).
+  - Andre ordklasser (pronomen, determinativ m.m.) får en enkel
+    merkelapp/bøyd-form-liste - disse er små, lukkede klasser der en
+    flat liste allerede er lett å lese.
+  - Alle tabeller viser én rad per alternativ stavemåte når en artikkel
+    har flere (f.eks. "skår"/"score", "jamføre"/"jevnføre").
+  - Ordklassenavn og bøyingsmerkelapper er hentet fra UiBs offisielle
+    kodelister (`word_class.json`/`sub_word_class.json`).
 - **Kryssreferanser** (f.eks. "trolle (I)", med homografnummer som
   romertall) vises i kursiv.
 - **Sammensetningsanalyse** (f.eks. "troll + mann" for "trollmann") hentes
@@ -117,6 +123,37 @@ https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases/latest/downlo
 
 Vil du ha en bestemt tidligere utgave, bruk den daterte filen fra
 [Releases](../../releases) i stedet.
+
+## Tester
+
+`tests/` inneholder to lag med tester mot ekte, lagrede artikler
+(`tests/fixtures/`, ekte data fra ord.uib.no):
+
+- `test_parser.py` - målrettede enhetstester på navngitt oppførsel
+  (bøyingstabellstruktur, homografnummer, domenekode-oppslag m.m.) -
+  lett å forstå hvorfor de feiler.
+- `test_stardict_golden.py` - golden-snapshot-tester som sammenligner
+  hele den rendrede definisjonen mot lagrede referansefiler i
+  `tests/golden/`. Disse fanger opp enhver utilsiktet endring i
+  sluttresultatet.
+
+Kjør lokalt:
+
+```
+pip install pytest
+python3 -m pytest tests/ -v
+```
+
+`.github/workflows/test.yml` kjører testene automatisk på hver push og
+pull request.
+
+Hvis en formatteringsendring i `ordbok_parser.py`/`ordbok_til_stardict.py`
+er tilsiktet, oppdater golden-filene og se over diffen før commit:
+
+```
+python3 tests/oppdater_golden.py
+git diff tests/golden/
+```
 
 ## Kildekode
 
