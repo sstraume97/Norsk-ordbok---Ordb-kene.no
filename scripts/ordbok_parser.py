@@ -156,15 +156,21 @@ class InflectionForm:
 
 @dataclass
 class InflectionTable:
-    """`kind == "grid"`: 2D-tabell (brukt for substantiv, som på
-    ordbokene.no), med `row_labels`/`col_labels` og `cells[(rad, kol)]`.
-    `kind == "list"`: enkel (merkelapp, bøyd form)-liste, brukt for
-    ordklasser uten en naturlig 2D-tabell (verb, adjektiv m.m.)."""
+    """`kind == "grid"`: substantiv-tabell som på ordbokene.no - to
+    kolonnegrupper (`col_groups`, f.eks. entall/flertall), hver med de
+    samme underkolonnene (`sub_cols`, f.eks. ubestemt form/bestemt
+    form). `cells[(gruppe, underkolonne)]` er en liste med bøyde former
+    (mer enn én ved sideformer, f.eks. "håpa, håpene"). `article` er
+    ubestemt kjønnsartikkel (en/ei/et) satt foran ubestemt entallsform,
+    hvis kjent. `kind == "list"`: enkel (merkelapp, bøyd form)-liste,
+    brukt for ordklasser uten en naturlig 2D-tabell (verb, adjektiv
+    m.m.)."""
 
     kind: str
-    row_labels: list[str] = field(default_factory=list)
-    col_labels: list[str] = field(default_factory=list)
-    cells: dict[tuple[int, int], str] = field(default_factory=dict)
+    col_groups: list[str] = field(default_factory=list)
+    sub_cols: list[str] = field(default_factory=list)
+    cells: dict[tuple[str, str], list[str]] = field(default_factory=dict)
+    article: Optional[str] = None
     rows: list[tuple[str, str]] = field(default_factory=list)
 
 
@@ -408,29 +414,37 @@ def _inflection_forms(lemma_obj: dict) -> list[InflectionForm]:
     return forms
 
 
-def _build_inflection_table(word_class_code: str, forms: list[InflectionForm]) -> Optional[InflectionTable]:
+# Ubestemt kjønnsartikkel satt foran ubestemt entallsform i
+# bøyingstabellen, slik ordbokene.no gjør det (f.eks. "et håp").
+ARTICLE_BY_GENDER = {"Masc": "en", "Fem": "ei", "Neuter": "et", "Masc/Fem": "en"}
+
+
+def _build_inflection_table(
+    word_class_code: str, forms: list[InflectionForm], gender_code: Optional[str] = None
+) -> Optional[InflectionTable]:
     if not forms:
         return None
 
     if word_class_code == "NOUN":
-        grid: dict[tuple[str, str], str] = {}
+        grid: dict[tuple[str, str], list[str]] = defaultdict(list)
         for infl in forms:
             tags = set(infl.tags)
             col = "flertall" if "Plur" in tags else "entall" if "Sing" in tags else None
-            row = "bestemt form" if "Def" in tags else "ubestemt form" if "Ind" in tags else None
-            if col and row:
-                grid[(row, col)] = infl.word_form
+            sub = "bestemt form" if "Def" in tags else "ubestemt form" if "Ind" in tags else None
+            if col and sub and infl.word_form not in grid[(col, sub)]:
+                grid[(col, sub)].append(infl.word_form)
         if grid:
-            rows = ["ubestemt form", "bestemt form"]
-            cols = ["entall", "flertall"]
-            cells = {
-                (r_i, c_i): grid[(r, c)]
-                for r_i, r in enumerate(rows)
-                for c_i, c in enumerate(cols)
-                if (r, c) in grid
-            }
-            if cells:
-                return InflectionTable(kind="grid", row_labels=rows, col_labels=cols, cells=cells)
+            col_groups = ["entall", "flertall"]
+            sub_cols = ["ubestemt form", "bestemt form"]
+            cells = {(g, s): grid.get((g, s), []) for g in col_groups for s in sub_cols}
+            if any(cells.values()):
+                return InflectionTable(
+                    kind="grid",
+                    col_groups=col_groups,
+                    sub_cols=sub_cols,
+                    cells=cells,
+                    article=ARTICLE_BY_GENDER.get(gender_code),
+                )
 
     # Fallback for andre ordklasser (verb, adjektiv, pronomen m.m.): en
     # enkel (merkelapp, bøyd form)-liste i stedet for en 2D-tabell, siden
@@ -471,7 +485,7 @@ def parse_article(raw: dict) -> Article:
     for l in lemma_objs:
         forms = _inflection_forms(l)
         inflection_forms.extend(forms)
-        table = _build_inflection_table(word_class_code, forms)
+        table = _build_inflection_table(word_class_code, forms, _gender_code(l))
         if table:
             inflection_tables.append((l.get("lemma", ""), table))
 

@@ -81,20 +81,40 @@ def _render_senses(senses: list[Sense]) -> str:
     return f"<ol>{''.join(items)}</ol>" if items else ""
 
 
+# Inline stiling siden StarDict-lesere ikke garantert støtter <style>-
+# blokker - matcher rutenett/gråtoner-oppsettet på ordbokene.no.
+_TABLE_STYLE = 'style="border-collapse:collapse;margin:4px 0"'
+_TH_STYLE = 'style="border:1px solid #999;background:#f0f0f0;padding:3px 10px;text-align:center"'
+_TD_STYLE = 'style="border:1px solid #999;padding:3px 10px;text-align:center"'
+
+
 def _render_inflection_table(lemma: str, table: InflectionTable, show_label: bool) -> str:
     label = f"<i>{html.escape(lemma)}:</i> " if show_label else ""
     if table.kind == "grid":
-        header = "".join(f"<th>{html.escape(c)}</th>" for c in table.col_labels)
-        rows = []
-        for r_i, r in enumerate(table.row_labels):
-            cells = "".join(
-                f"<td>{html.escape(table.cells.get((r_i, c_i), '-'))}</td>"
-                for c_i in range(len(table.col_labels))
-            )
-            rows.append(f"<tr><th>{html.escape(r)}</th>{cells}</tr>")
-        return f'{label}<table border="1"><tr><th></th>{header}</tr>{"".join(rows)}</table>'
-    rows = "".join(f"<tr><td>{html.escape(l)}</td><td>{html.escape(f)}</td></tr>" for l, f in table.rows)
-    return f'{label}<table border="1">{rows}</table>'
+        top = "".join(
+            f'<th {_TH_STYLE} colspan="{len(table.sub_cols)}">{html.escape(g)}</th>'
+            for g in table.col_groups
+        )
+        sub = "".join(
+            f'<th {_TH_STYLE}><i>{html.escape(s)}</i></th>'
+            for _ in table.col_groups
+            for s in table.sub_cols
+        )
+        cells = []
+        for g in table.col_groups:
+            for s in table.sub_cols:
+                forms = table.cells.get((g, s), [])
+                text = ", ".join(html.escape(f) for f in forms) if forms else "-"
+                if g == "entall" and s == "ubestemt form" and table.article and forms:
+                    text = f'<i style="color:#777">{html.escape(table.article)}</i> {text}'
+                cells.append(f"<td {_TD_STYLE}>{text}</td>")
+        data_row = "<tr>" + "".join(cells) + "</tr>"
+        return f'{label}<table {_TABLE_STYLE}><tr>{top}</tr><tr>{sub}</tr>{data_row}</table>'
+    rows = "".join(
+        f'<tr><td {_TD_STYLE}>{html.escape(l)}</td><td {_TD_STYLE}>{html.escape(f)}</td></tr>'
+        for l, f in table.rows
+    )
+    return f'{label}<table {_TABLE_STYLE}>{rows}</table>'
 
 
 def _render_inflection_tables(article: Article) -> str:
@@ -126,13 +146,6 @@ def _render_definition(article: Article, compounds: dict[str, list[str]]) -> str
     if article.etymology:
         parts.append(f"<b>Opphav:</b> {_escape(article.etymology)}")
 
-    comp = []
-    for lemma in article.lemmas:
-        comp.extend(compounds.get(lemma.lower(), []))
-    comp = list(dict.fromkeys(comp))
-    if comp:
-        parts.append(f"<b>Sammensetning:</b> {_escape(' / '.join(comp))}")
-
     tables_html = _render_inflection_tables(article)
     if tables_html:
         parts.append(tables_html)
@@ -143,7 +156,21 @@ def _render_definition(article: Article, compounds: dict[str, list[str]]) -> str
     expr_html = _render_expressions_section(article)
     if expr_html:
         parts.append(expr_html)
-    return "<br>".join(p for p in parts if p)
+
+    ordbokene_html = "<br>".join(p for p in parts if p)
+
+    # Sammensetningsanalysen kommer fra en helt annen kilde (Norsk
+    # Ordbank/Nasjonalbiblioteket, ikke Ordbøkene/UiB) - skilt ut med
+    # delelinje og egen tittel i stedet for å blandes inn i artikkelen.
+    comp = []
+    for lemma in article.lemmas:
+        comp.extend(compounds.get(lemma.lower(), []))
+    comp = list(dict.fromkeys(comp))
+    if not comp:
+        return ordbokene_html
+
+    ordbank_html = f"<b>Fra Norsk Ordbank</b><br><b>Sammensetning:</b> {_escape(' / '.join(comp))}"
+    return f"{ordbokene_html}<hr>{ordbank_html}"
 
 
 def _render_expression_definition(article: Article, expr: Expression) -> str:

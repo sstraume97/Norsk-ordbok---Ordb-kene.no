@@ -85,13 +85,18 @@ def _render_inflection_table_md(lemma: str, table: InflectionTable, show_label: 
         lines.append(f"**{_md_escape(lemma)}**")
         lines.append("")
     if table.kind == "grid":
-        lines.append("| | " + " | ".join(table.col_labels) + " |")
-        lines.append("|" + "---|" * (len(table.col_labels) + 1))
-        for r_i, r in enumerate(table.row_labels):
-            cells = " | ".join(
-                _md_escape(table.cells.get((r_i, c_i), "-")) for c_i in range(len(table.col_labels))
-            )
-            lines.append(f"| **{r}** | {cells} |")
+        headers = [f"{g} – {s}" for g in table.col_groups for s in table.sub_cols]
+        lines.append("| " + " | ".join(headers) + " |")
+        lines.append("|" + "---|" * len(headers))
+        cells = []
+        for g in table.col_groups:
+            for s in table.sub_cols:
+                forms = table.cells.get((g, s), [])
+                text = ", ".join(_md_escape(f) for f in forms) if forms else "-"
+                if g == "entall" and s == "ubestemt form" and table.article and forms:
+                    text = f"*{_md_escape(table.article)}* {text}"
+                cells.append(text)
+        lines.append("| " + " | ".join(cells) + " |")
     else:
         lines.append("| Form | Bøyd form |")
         lines.append("|---|---|")
