@@ -80,6 +80,12 @@ berikelse - ikke kjernedata. Lisens: CC-BY 4.0
 3. Ved endring: `scripts/ordbok_til_stardict.py` konverterer JSON til
    PyGlossary-tabfiler, og `pyglossary` bygger StarDict-filene
    (komprimert med `dictzip`).
+   - **Sanity-sjekk:** hvis antall oppslagsord faller mer enn 20 % fra
+     forrige utgave, avbryter bygget med en feilmelding i stedet for å
+     publisere en ordbok som er tydelig ødelagt (f.eks. hvis ord.uib.no
+     endrer dataformatet stille, eller parsingen feiler delvis uten å
+     krasje). Terskelen sjekkes kun når det finnes en forrige utgave å
+     sammenligne mot.
    - Hvert lemma og alle bøyde former er alternative oppslagsord som
      peker til samme definisjon (f.eks. treffer "husene" artikkelen for
      "hus").

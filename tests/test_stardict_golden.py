@@ -15,7 +15,7 @@ from conftest import GOLDEN_DIR, load_fixture
 from ordbok_parser import parse_article
 from ordbok_til_stardict import _render_definition
 
-FIXTURES = ["trollmann", "haar", "fin", "stor", "skaar", "slaa", "haap", "jamfore"]
+FIXTURES = ["trollmann", "haar", "fin", "stor", "skaar", "slaa", "haap", "jamfore", "han", "gjerne", "denne"]
 
 
 @pytest.mark.parametrize("name", FIXTURES)

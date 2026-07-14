@@ -22,7 +22,7 @@ from conftest import GOLDEN_DIR, load_fixture  # noqa: E402
 from ordbok_parser import parse_article  # noqa: E402
 from ordbok_til_stardict import _render_definition  # noqa: E402
 
-FIXTURES = ["trollmann", "haar", "fin", "stor", "skaar", "slaa", "haap", "jamfore"]
+FIXTURES = ["trollmann", "haar", "fin", "stor", "skaar", "slaa", "haap", "jamfore", "han", "gjerne", "denne"]
 
 
 def main() -> None:

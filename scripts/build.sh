@@ -80,6 +80,21 @@ for d in bm nn; do
     python3 "${SCRIPT_DIR}/ordbok_til_stardict.py" "tmp/${d}.tar.gz" "tmp/${d}.txt" \
         --lemma-list-out "tmp/${d}.lemmas.txt" "${ORDBANK_ARG[@]}"
 
+    echo "== ${d}: sanity-sjekk av oppslagsordantall =="
+    NEW_COUNT=$(wc -l < "tmp/${d}.lemmas.txt")
+    OLD_COUNT=$(wc -l < "state/${d}.lemmas.txt" 2>/dev/null || echo 0)
+    echo "   ${d}: ${NEW_COUNT} oppslagsord (forrige: ${OLD_COUNT})"
+    if [ "${OLD_COUNT}" -gt 0 ]; then
+        TERSKEL=$(( OLD_COUNT * 80 / 100 ))
+        if [ "${NEW_COUNT}" -lt "${TERSKEL}" ]; then
+            echo "FEIL: Antall oppslagsord for ${d} falt fra ${OLD_COUNT} til ${NEW_COUNT} (mer enn 20% nedgang)." >&2
+            echo "Dette tyder på en feil i parsingen eller i kildedataene hos ord.uib.no - avbryter" >&2
+            echo "bygget for å unngå å publisere en ødelagt ordbok. Undersøk før du eventuelt" >&2
+            echo "kjører på nytt med FORCE_REBUILD=true." >&2
+            exit 1
+        fi
+    fi
+
     echo "== ${d}: skriver utgavenotat =="
     python3 "${SCRIPT_DIR}/lag_utgavenotat.py" "${navn}" "tmp/${d}.lemmas.txt" "state/${d}.lemmas.txt" \
         >> dist/release-notes.md

@@ -105,3 +105,37 @@ def test_slaa_mange_faste_uttrykk():
     assert len(art.expressions) > 30
     names = {e.lemma for e in art.expressions}
     assert "slå an" in names
+
+
+def test_han_pronomen_bruker_flat_liste():
+    # Pronomen er en liten, lukket klasse (bare nominativ/akkusativ) -
+    # den generiske "list"-tabellen er allerede lett å lese for disse,
+    # så de får ikke en egen tabelltype slik substantiv/adjektiv/verb har.
+    art = parse_article(load_fixture("han"))
+    assert art.word_class == "pronomen"
+    _, table = art.inflection_tables[0]
+    assert table.kind == "list"
+    labels = {label for label, _ in table.rows}
+    assert labels == {"nominativ", "akkusativ"}
+
+
+def test_gjerne_adverb_med_komparasjon():
+    # Adverb kan ha positiv/komparativ/superlativ (som adjektiv), men
+    # med bare én form per grad - den flate lista er allerede riktig
+    # og ryddig for dette tilfellet.
+    art = parse_article(load_fixture("gjerne"))
+    assert art.word_class == "adverb"
+    _, table = art.inflection_tables[0]
+    assert table.kind == "list"
+    assert dict(table.rows) == {"positiv": "gjerne", "komparativ": "heller", "superlativ": "helst"}
+
+
+def test_denne_determinativ_uten_reell_bøying():
+    # "denne" har kun én bøyd form uten grammatiske tagger i kildedataene
+    # (de andre formene, "dette"/"disse", er egne artikler) - skal ikke
+    # krasje eller produsere en tom/uleselig tabell.
+    art = parse_article(load_fixture("denne"))
+    assert art.word_class == "determinativ"
+    _, table = art.inflection_tables[0]
+    assert table.kind == "list"
+    assert table.rows == [("-", "denne")]
