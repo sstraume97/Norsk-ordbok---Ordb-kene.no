@@ -119,9 +119,6 @@ Vil du ha en bestemt tidligere utgave, bruk den daterte filen fra
 - `scripts/lib_ordbank.sh` - henter Norsk Ordbank (brukt av `build.sh`).
 
 ## Lisens på dataene
-
-Ordboksdataene er CC-BY 4.0 (Universitetet i Bergen / Språkrådet) - oppgi
-kilde ved videre bruk. Se <https://ord.uib.no/ord_1_Ordlister.html>.
-Sammensetningsanalysen er fra Norsk Ordbank, også CC-BY 4.0
-(Nasjonalbiblioteket/Språkbanken) - se
-<https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/>.
+Lisens følger lisensen til datakildene:
+* [Ordboksdataene er CC-BY 4.0 (Universitetet i Bergen / Språkrådet) - oppgi kilde ved videre bruk.](https://ord.uib.no/ord_1_Ordlister.html)
+* [Sammensetningsanalysen er fra Norsk Ordbank, også CC-BY 4.0 (Nasjonalbiblioteket/Språkbanken)](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/)
