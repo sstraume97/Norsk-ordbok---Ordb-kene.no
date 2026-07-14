@@ -85,14 +85,22 @@ er en supplerende berikelse - ikke kjernedata. Lisens: CC-BY 4.0
 5. `state/*.sha256` committes tilbake til repoet, slik at neste kjøring
    vet om noe har endret seg.
 
-#### Stabil nedlastingslenke
+#### Nedlastingslenker
 
-Fordi hver release markeres `make_latest: true`, kan du alltid peke til:
+Hver release inneholder fire filer: `bm-stardict.zip`/`nn-stardict.zip`
+(faste navn) og daterte kopier `bm-stardict-ÅÅÅÅ-MM-DD.zip`/
+`nn-stardict-ÅÅÅÅ-MM-DD.zip` (utgaven fra en bestemt kjøring).
+
+Fordi hver release markeres `--latest`, kan du alltid peke til siste
+utgave med de faste filnavnene:
 
 ```
 https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases/latest/download/bm-stardict.zip
 https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases/latest/download/nn-stardict.zip
 ```
+
+Vil du ha en bestemt tidligere utgave, bruk den daterte filen fra
+[Releases](../../releases) i stedet.
 
 ### Quarto-bok - `.github/workflows/quarto-book.yml`
 

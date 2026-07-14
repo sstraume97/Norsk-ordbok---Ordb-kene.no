@@ -60,18 +60,35 @@ jobs:
             git push
           fi
 
+      - name: Lag daterte kopier
+        if: steps.build.outputs.changed == 'true'
+        env:
+          TAG: ${{ steps.date.outputs.value }}
+        run: |
+          # bm-stardict.zip/nn-stardict.zip beholder faste navn (stabil
+          # /releases/latest/download/-lenke, se README), mens de
+          # daterte kopiene lar deg peke til en bestemt utgave.
+          cp dist/bm-stardict.zip "dist/bm-stardict-${TAG}.zip"
+          cp dist/nn-stardict.zip "dist/nn-stardict-${TAG}.zip"
+
       - name: Lag GitHub Release
         if: steps.build.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.date.outputs.value }}
         run: |
+          FILES=(
+            dist/bm-stardict.zip
+            dist/nn-stardict.zip
+            "dist/bm-stardict-${TAG}.zip"
+            "dist/nn-stardict-${TAG}.zip"
+          )
           if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
             echo "Release $TAG finnes allerede - oppdaterer filene."
-            gh release upload "$TAG" dist/bm-stardict.zip dist/nn-stardict.zip \
+            gh release upload "$TAG" "${FILES[@]}" \
               --repo "${{ github.repository }}" --clobber
           else
-            gh release create "$TAG" dist/bm-stardict.zip dist/nn-stardict.zip \
+            gh release create "$TAG" "${FILES[@]}" \
               --repo "${{ github.repository }}" \
               --title "Ordbøkene $TAG" \
               --latest
