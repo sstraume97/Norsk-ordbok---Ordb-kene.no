@@ -91,8 +91,15 @@ berikelse - ikke kjernedata. Lisens: CC-BY 4.0
    [GitHub Release](../../releases) merket med datoen (via `gh release
    create`/`gh release upload` - idempotent, så en release som allerede
    finnes for dagens dato får oppdaterte filer i stedet for å feile).
-5. `state/*.sha256` committes tilbake til repoet, slik at neste kjøring
-   vet om noe har endret seg.
+   - Release-notatene genereres automatisk av `scripts/lag_utgavenotat.py`,
+     som sammenligner den nye lemmalista (fra `--lemma-list-out` i
+     `ordbok_til_stardict.py`) mot forrige utgaves lagrede lemmaliste
+     (`state/bm.lemmas.txt`/`state/nn.lemmas.txt`) og lister opp nye og
+     fjernede oppslagsord per målform. Første kjøring med denne
+     sporingen viser bare totalantallet, siden det ikke finnes noe å
+     sammenligne mot ennå.
+5. `state/*.sha256` og `state/*.lemmas.txt` committes tilbake til
+   repoet, slik at neste kjøring vet om noe har endret seg.
 
 ### Nedlastingslenker
 
@@ -123,6 +130,9 @@ Vil du ha en bestemt tidligere utgave, bruk den daterte filen fra
 - `scripts/build.sh` - orkestrerer nedlasting, endringssjekk og
   StarDict-bygg.
 - `scripts/lib_ordbank.sh` - henter Norsk Ordbank (brukt av `build.sh`).
+- `scripts/lag_utgavenotat.py` - sammenligner ny/forrige lemmaliste og
+  skriver en markdown-oppsummering av nye/fjernede ord til
+  release-notatene.
 
 ## Lisens på dataene
 Lisens følger lisensen til datakildene:

@@ -8,9 +8,15 @@ Bruk:
        curl -O https://ord.uib.no/bm/fil/article.tar.gz   (bokmål)
        curl -O https://ord.uib.no/nn/fil/article.tar.gz   (nynorsk)
 
-    2. Kjør skriptet (Norsk Ordbank-arkivet er valgfritt, for
-       sammensetningsanalyse - se scripts/ordbok_parser.py):
-       python3 ordbok_til_stardict.py article.tar.gz bokmaal.txt [norsk_ordbank.tar.gz]
+    2. Kjør skriptet:
+       python3 ordbok_til_stardict.py article.tar.gz bokmaal.txt \
+           [--ordbank norsk_ordbank.tar.gz] [--lemma-list-out bokmaal-ord.txt]
+
+       --ordbank er Norsk Ordbank-arkivet (valgfritt, for
+       sammensetningsanalyse - se scripts/ordbok_parser.py). --lemma-list-out
+       skriver den flate lista over alle oppslagsord (ikke bøyningsformer)
+       til en fil - brukt av scripts/lag_utgavenotat.py til å oppsummere
+       nye/fjernede ord i GitHub Release-notatene.
 
     3. Bygg StarDict med PyGlossary:
        pip install pyglossary
@@ -33,8 +39,8 @@ Lisens på dataene: CC-BY 4.0 (UiB/Språkrådet, og Nasjonalbiblioteket for
 Norsk Ordbank) - oppgi kilde.
 """
 
+import argparse
 import html
-import sys
 from pathlib import Path
 from typing import Optional
 
@@ -187,12 +193,20 @@ def _tabfile_line(headwords: list[str], definition: str) -> str:
     return f"{head}\t{defn}"
 
 
-def convert(tar_path: Path, out_path: Path, ordbank_path: Optional[Path] = None) -> None:
+def convert(
+    tar_path: Path,
+    out_path: Path,
+    ordbank_path: Optional[Path] = None,
+    lemma_list_path: Optional[Path] = None,
+) -> None:
     compounds = load_compound_analysis(ordbank_path) if ordbank_path else {}
+    lemma_set: Optional[set[str]] = set() if lemma_list_path else None
     with out_path.open("w", encoding="utf-8") as out:
         for article in iterate_articles(tar_path):
             if not article.lemmas:
                 continue
+            if lemma_set is not None:
+                lemma_set.update(article.lemmas)
             headwords = list(dict.fromkeys(article.lemmas + article.inflection_word_forms))
             out.write(_tabfile_line(headwords, _render_definition(article, compounds)) + "\n")
             for expr in article.expressions:
@@ -201,14 +215,21 @@ def convert(tar_path: Path, out_path: Path, ordbank_path: Optional[Path] = None)
                 out.write(
                     _tabfile_line([expr.lemma], _render_expression_definition(article, expr)) + "\n"
                 )
+    if lemma_list_path is not None:
+        lemma_list_path.write_text("\n".join(sorted(lemma_set)) + "\n", encoding="utf-8")
 
 
 def main() -> None:
-    if len(sys.argv) not in (3, 4):
-        print(f"Bruk: {sys.argv[0]} article.tar.gz utfil.txt [norsk_ordbank.tar.gz]", file=sys.stderr)
-        raise SystemExit(1)
-    ordbank_path = Path(sys.argv[3]) if len(sys.argv) == 4 else None
-    convert(Path(sys.argv[1]), Path(sys.argv[2]), ordbank_path)
+    parser = argparse.ArgumentParser(description="Konverter Ordbøkene article.tar.gz til PyGlossary-tabfile.")
+    parser.add_argument("tar_path", type=Path, help="article.tar.gz fra ord.uib.no")
+    parser.add_argument("out_path", type=Path, help="Tabfile som skrives ut")
+    parser.add_argument("--ordbank", type=Path, default=None, help="Norsk Ordbank-tar.gz (valgfritt)")
+    parser.add_argument(
+        "--lemma-list-out", type=Path, default=None,
+        help="Skriv flat liste over alle oppslagsord til denne filen (valgfritt)",
+    )
+    args = parser.parse_args()
+    convert(args.tar_path, args.out_path, args.ordbank, args.lemma_list_out)
 
 
 if __name__ == "__main__":

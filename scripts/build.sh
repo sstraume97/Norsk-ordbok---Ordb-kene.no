@@ -6,7 +6,9 @@
 # Forventer å kjøres fra repo-roten. Output:
 #   dist/bm-stardict.zip
 #   dist/nn-stardict.zip
+#   dist/release-notes.md (oppsummerer nye/fjernede oppslagsord siden forrige utgave)
 #   state/bm.sha256, state/nn.sha256 (oppdatert hvis noe endret seg)
+#   state/bm.lemmas.txt, state/nn.lemmas.txt (oppdatert hvis noe endret seg)
 #
 # Setter GITHUB_OUTPUT "changed=true|false" hvis miljøvariabelen finnes
 # (dvs. når skriptet kjøres inne i en GitHub Actions-jobb).
@@ -63,17 +65,25 @@ if [ "${CHANGED}" = false ]; then
     exit 0
 fi
 
+: > dist/release-notes.md
+
 for d in bm nn; do
     navn="${NAMES[$d]}"
 
     hent_ordbank "${d}" "tmp/${d}-ordbank.tar.gz"
     ORDBANK_ARG=()
     if [ -f "tmp/${d}-ordbank.tar.gz" ]; then
-        ORDBANK_ARG=("tmp/${d}-ordbank.tar.gz")
+        ORDBANK_ARG=(--ordbank "tmp/${d}-ordbank.tar.gz")
     fi
 
     echo "== ${d}: konverterer til tabfile =="
-    python3 "${SCRIPT_DIR}/ordbok_til_stardict.py" "tmp/${d}.tar.gz" "tmp/${d}.txt" "${ORDBANK_ARG[@]}"
+    python3 "${SCRIPT_DIR}/ordbok_til_stardict.py" "tmp/${d}.tar.gz" "tmp/${d}.txt" \
+        --lemma-list-out "tmp/${d}.lemmas.txt" "${ORDBANK_ARG[@]}"
+
+    echo "== ${d}: skriver utgavenotat =="
+    python3 "${SCRIPT_DIR}/lag_utgavenotat.py" "${navn}" "tmp/${d}.lemmas.txt" "state/${d}.lemmas.txt" \
+        >> dist/release-notes.md
+    echo >> dist/release-notes.md
 
     echo "== ${d}: bygger StarDict med pyglossary =="
     rm -rf "tmp/${d}-stardict"
@@ -94,6 +104,7 @@ for d in bm nn; do
     (cd "tmp/${d}-stardict" && zip -q -r "../../dist/${d}-stardict.zip" .)
 
     mv "tmp/${d}.sha256.new" "state/${d}.sha256"
+    mv "tmp/${d}.lemmas.txt" "state/${d}.lemmas.txt"
 done
 
 echo "Ferdig. Nye filer i dist/: $(ls dist)"
