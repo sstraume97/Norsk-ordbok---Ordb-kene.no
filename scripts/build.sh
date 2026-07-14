@@ -10,6 +10,11 @@
 #
 # Setter GITHUB_OUTPUT "changed=true|false" hvis miljøvariabelen finnes
 # (dvs. når skriptet kjøres inne i en GitHub Actions-jobb).
+#
+# Sett FORCE_REBUILD=true for å tvinge bygg/release selv om
+# kildedataene hos ord.uib.no ikke har endret seg siden forrige kjøring
+# (f.eks. etter endringer i konverteringsskriptene) - brukes av
+# workflow_dispatch-inputen "force" i .github/workflows/Build.yml.
 
 set -euo pipefail
 
@@ -17,6 +22,8 @@ declare -A NAMES=( ["bm"]="Bokmålsordboka" ["nn"]="Nynorskordboka" )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/lib_ordbank.sh"
+
+FORCE_REBUILD="${FORCE_REBUILD:-false}"
 
 mkdir -p dist tmp state
 
@@ -35,6 +42,11 @@ for d in bm nn; do
     fi
     echo "${NEW_HASH}" > "tmp/${d}.sha256.new"
 done
+
+if [ "${FORCE_REBUILD}" = "true" ] && [ "${CHANGED}" = false ]; then
+    echo "FORCE_REBUILD=true - bygger på nytt selv om kildedata er uendret."
+    CHANGED=true
+fi
 
 if [ -n "${GITHUB_OUTPUT:-}" ]; then
     echo "changed=${CHANGED}" >> "${GITHUB_OUTPUT}"

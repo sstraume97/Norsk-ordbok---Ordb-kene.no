@@ -64,6 +64,10 @@ er en supplerende berikelse - ikke kjernedata. Lisens: CC-BY 4.0
 2. `scripts/build.sh` laster ned `article.tar.gz` for `bm` og `nn`,
    sammenligner SHA-256 med forrige kjøring (lagret i `state/`), og
    avbryter tidlig hvis ingenting er endret - da lages ingen ny release.
+   - Manuell kjøring har en `force`-avkryssingsboks ("Run workflow") som
+     tvinger et nytt bygg/release selv om kildedataene hos ord.uib.no er
+     uendret - nyttig etter endringer i konverteringsskriptene selv
+     (f.eks. formattering), siden hash-sjekken bare ser på kildedataene.
 3. Ved endring: `scripts/ordbok_til_stardict.py` konverterer JSON til
    PyGlossary-tabfiler, og `pyglossary` bygger StarDict-filene
    (komprimert med `dictzip`).
@@ -75,7 +79,9 @@ er en supplerende berikelse - ikke kjernedata. Lisens: CC-BY 4.0
      grunnordet.
 4. Ferdige ordbøker zippes til `dist/bm-stardict.zip` og
    `dist/nn-stardict.zip`, og publiseres som en
-   [GitHub Release](../../releases) merket med datoen.
+   [GitHub Release](../../releases) merket med datoen (via `gh release
+   create`/`gh release upload` - idempotent, så en release som allerede
+   finnes for dagens dato får oppdaterte filer i stedet for å feile).
 5. `state/*.sha256` committes tilbake til repoet, slik at neste kjøring
    vet om noe har endret seg.
 

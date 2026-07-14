@@ -5,7 +5,12 @@ on:
     # Kl. 05:00 UTC 1. i hver måned. ord.uib.no oppdaterer article.tar.gz
     # ukentlig, så vi er alltid innenfor én uke etter siste kildeendring.
     - cron: '0 5 1 * *'
-  workflow_dispatch: {}   # tillat manuell kjøring fra Actions-fanen
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Tving nytt bygg/release selv om kildedata hos ord.uib.no ikke har endret seg (f.eks. etter endringer i konverteringsskriptene)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # trengs for å committe oppdatert state/ og lage release
@@ -30,6 +35,8 @@ jobs:
 
       - name: Last ned, sjekk endringer og bygg ordbøker
         id: build
+        env:
+          FORCE_REBUILD: ${{ github.event.inputs.force }}
         run: bash scripts/build.sh
 
       - name: Datostempel for release-tag
@@ -43,16 +50,29 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add state/
-          git commit -m "Oppdater state etter bygg ${{ steps.date.outputs.value }}"
-          git push
+          # Ved FORCE_REBUILD uten reell datakildeendring er state/-
+          # innholdet identisk med det som allerede er committet - da er
+          # det ingenting å committe, og det skal ikke feile bygget.
+          if git diff --cached --quiet; then
+            echo "Ingen endring i state/ - hopper over commit."
+          else
+            git commit -m "Oppdater state etter bygg ${{ steps.date.outputs.value }}"
+            git push
+          fi
 
       - name: Lag GitHub Release
         if: steps.build.outputs.changed == 'true'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.date.outputs.value }}
-          name: Ordbøkene ${{ steps.date.outputs.value }}
-          make_latest: 'true'
-          files: |
-            dist/bm-stardict.zip
-            dist/nn-stardict.zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.date.outputs.value }}
+        run: |
+          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Release $TAG finnes allerede - oppdaterer filene."
+            gh release upload "$TAG" dist/bm-stardict.zip dist/nn-stardict.zip \
+              --repo "${{ github.repository }}" --clobber
+          else
+            gh release create "$TAG" dist/bm-stardict.zip dist/nn-stardict.zip \
+              --repo "${{ github.repository }}" \
+              --title "Ordbøkene $TAG" \
+              --latest
+          fi
