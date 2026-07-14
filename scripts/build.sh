@@ -16,6 +16,7 @@ set -euo pipefail
 declare -A NAMES=( ["bm"]="Bokmålsordboka" ["nn"]="Nynorskordboka" )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/lib_ordbank.sh"
 
 mkdir -p dist tmp state
 
@@ -46,8 +47,15 @@ fi
 
 for d in bm nn; do
     navn="${NAMES[$d]}"
+
+    hent_ordbank "${d}" "tmp/${d}-ordbank.tar.gz"
+    ORDBANK_ARG=()
+    if [ -f "tmp/${d}-ordbank.tar.gz" ]; then
+        ORDBANK_ARG=("tmp/${d}-ordbank.tar.gz")
+    fi
+
     echo "== ${d}: konverterer til tabfile =="
-    python3 "${SCRIPT_DIR}/ordbok_til_stardict.py" "tmp/${d}.tar.gz" "tmp/${d}.txt"
+    python3 "${SCRIPT_DIR}/ordbok_til_stardict.py" "tmp/${d}.tar.gz" "tmp/${d}.txt" "${ORDBANK_ARG[@]}"
 
     echo "== ${d}: bygger StarDict med pyglossary =="
     rm -rf "tmp/${d}-stardict"

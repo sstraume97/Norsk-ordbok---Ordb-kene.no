@@ -36,10 +36,18 @@ jobs:
           curl -sSL --fail -o tmp/bm.tar.gz https://ord.uib.no/bm/fil/article.tar.gz
           curl -sSL --fail -o tmp/nn.tar.gz https://ord.uib.no/nn/fil/article.tar.gz
 
+      - name: Last ned Norsk Ordbank (sammensetningsanalyse, beste innsats)
+        run: |
+          source scripts/lib_ordbank.sh
+          hent_ordbank bm tmp/bm-ordbank.tar.gz
+          hent_ordbank nn tmp/nn-ordbank.tar.gz
+
       - name: Generer Quarto-kapitler
         run: |
-          python3 scripts/ordbok_til_quarto.py tmp/bm.tar.gz book/bm "Bokmålsordboka"
-          python3 scripts/ordbok_til_quarto.py tmp/nn.tar.gz book/nn "Nynorskordboka"
+          BM_ORDBANK=(); [ -f tmp/bm-ordbank.tar.gz ] && BM_ORDBANK=(tmp/bm-ordbank.tar.gz)
+          NN_ORDBANK=(); [ -f tmp/nn-ordbank.tar.gz ] && NN_ORDBANK=(tmp/nn-ordbank.tar.gz)
+          python3 scripts/ordbok_til_quarto.py tmp/bm.tar.gz book/bm "Bokmålsordboka" "${BM_ORDBANK[@]}"
+          python3 scripts/ordbok_til_quarto.py tmp/nn.tar.gz book/nn "Nynorskordboka" "${NN_ORDBANK[@]}"
 
       - name: Sett opp Quarto
         uses: quarto-dev/quarto-actions/setup@v2

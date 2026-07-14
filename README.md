@@ -24,7 +24,38 @@ Data hentes fra UiBs offisielle nedlastingsside for ordlister
 All parsing av selve artikkelstrukturen (rekursiv tolkning av
 definisjoner, eksempler, faste uttrykk/idiomer, bøyningsformer,
 kryssreferanser) ligger i én delt modul, `scripts/ordbok_parser.py`, som
-både StarDict- og Quarto-genereringen bygger videre på.
+både StarDict- og Quarto-genereringen bygger videre på. Dette gir samme
+detaljnivå som selve ordbokene.no:
+
+- **Bøyingstabell**, ikke bare en flat liste: substantiv får en ekte
+  entall/flertall × ubestemt/bestemt-tabell (som på ordbokene.no), andre
+  ordklasser (verb, adjektiv m.m.) får en enkel merkelapp/bøyd-form-liste.
+  Ordklassenavn og bøyingsmerkelapper er hentet fra UiBs offisielle
+  kodelister (`word_class.json`/`sub_word_class.json`).
+- **Kryssreferanser** (f.eks. "trolle (I)", med homografnummer som
+  romertall) blir ekte klikkbare lenker i Quarto-boka, og kursiv tekst i
+  StarDict.
+- **Sammensetningsanalyse** (f.eks. "troll + mann" for "trollmann") hentes
+  fra **Norsk Ordbank** (Nasjonalbiblioteket/Språkbanken) - se eget avsnitt
+  under.
+
+### Norsk Ordbank (sammensetningsanalyse)
+
+[Norsk Ordbank](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/)
+(bokmål) og [tilsvarende for nynorsk](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-41/)
+er et separat morfologisk leksikon fra Nasjonalbiblioteket/Språkbanken.
+Bøyingsdataene der overlapper det vi allerede får fra `article.tar.gz`
+(samme underliggende paradigmesystem), så vi bruker Norsk Ordbank *kun*
+til `leddanalyse.txt` (sammensetningsanalyse - hvilke ord en
+sammensetning er bygget av), som ikke finnes i Ordbøkene-artiklene.
+
+`scripts/lib_ordbank.sh` finner og laster ned siste tilgjengelige
+tar.gz-fil for hvert målform automatisk (filnavnene er datostemplet, så
+vi henter alltid det nyeste treffet fra ressurskatalogsiden). Dette er
+**beste innsats**: begge byggejobbene fortsetter uten
+sammensetningsanalyse hvis nedlastingen skulle mislykkes, siden det bare
+er en supplerende berikelse - ikke kjernedata. Lisens: CC-BY 4.0
+(Nasjonalbiblioteket/Språkrådet/Universitetet i Bergen).
 
 ### StarDict - `.github/workflows/Build.yml`
 
@@ -87,14 +118,19 @@ repo-innstilling som må gjøres manuelt i GitHub-grensesnittet.
 ## Kildekode
 
 - `scripts/ordbok_parser.py` - delt parsing av `article.tar.gz` til en
-  enkel `Article`-struktur (lemmaer, ordklasse, uttale, etymologi,
-  betydninger, faste uttrykk, bøyningsformer).
+  `Article`-struktur (lemmaer m/homografnummer, ordklasse, uttale,
+  etymologi, betydninger, faste uttrykk, bøyingstabeller,
+  kryssreferanse-markører), samt lasting av Norsk Ordbanks
+  sammensetningsanalyse.
 - `scripts/ordbok_til_stardict.py` - `Article` → PyGlossary-tabfile
-  (HTML-formatert definisjon).
+  (HTML-formatert definisjon, med bøyingstabell som HTML-tabell).
 - `scripts/ordbok_til_quarto.py` - `Article` → Quarto-kapitler
-  (Markdown), gruppert alfabetisk.
+  (Markdown, med bøyingstabell som Markdown-tabell og ekte
+  kryssreferanselenker), gruppert alfabetisk.
 - `scripts/build.sh` - orkestrerer nedlasting, endringssjekk og
   StarDict-bygg.
+- `scripts/lib_ordbank.sh` - delt hjelpefunksjon for å hente Norsk
+  Ordbank (brukes av `build.sh` og `quarto-book.yml`).
 - `book/` - Quarto-bokprosjekt (`_quarto.yml`, `index.qmd`,
   `nedlasting.qmd`, samt generert innhold i `bm/`/`nn/`).
 
@@ -102,3 +138,6 @@ repo-innstilling som må gjøres manuelt i GitHub-grensesnittet.
 
 Ordboksdataene er CC-BY 4.0 (Universitetet i Bergen / Språkrådet) - oppgi
 kilde ved videre bruk. Se <https://ord.uib.no/ord_1_Ordlister.html>.
+Sammensetningsanalysen er fra Norsk Ordbank, også CC-BY 4.0
+(Nasjonalbiblioteket/Språkbanken) - se
+<https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/>.

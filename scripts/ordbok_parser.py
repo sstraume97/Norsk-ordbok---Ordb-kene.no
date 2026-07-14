@@ -1,29 +1,42 @@
 #!/usr/bin/env python3
 """
-Delt parsing-modul for Ordbøkene-artikler (ord.uib.no).
+Delt parsing-modul for Ordbøkene-artikler (ord.uib.no) og Norsk Ordbank
+(Språkbanken/Nasjonalbiblioteket).
 
 Leser `article.tar.gz` (ett `article/<id>.json` per artikkel, verifisert
 mot ekte data fra UiB) og bygger en enkel, gjenbrukbar `Article`-struktur
 som både `ordbok_til_stardict.py` (StarDict) og `ordbok_til_quarto.py`
 (Quarto-bok) bygger videre på. All rekursiv tolkning av `body`-elementer
-(definisjoner, eksempler, faste uttrykk, kryssreferanser) skjer her, slik
-at de to konsumentene ikke dupliserer denne logikken.
+(definisjoner, eksempler, faste uttrykk, bøyningsformer, kryssreferanser)
+skjer her, slik at de to konsumentene ikke dupliserer denne logikken.
 
 Skjemaet er ikke offentlig dokumentert i detalj - det er utledet empirisk
 fra ekte artikler (f.eks. https://ord.uib.no/bm/article/54131.json og
-.../54676.json). Ukjente/uventede elementtyper ignoreres stille i stedet
-for å feile, siden ordboka er stor og har mange kant-tilfeller.
+.../54676.json) og fra referansefilene `word_class.json`/
+`sub_word_class.json` (https://ord.uib.no/bm/fil/word_class.json).
+Ukjente/uventede elementtyper ignoreres stille i stedet for å feile,
+siden ordboka er stor og har mange kant-tilfeller.
 
-Lisens på dataene: CC-BY 4.0 (UiB/Språkrådet) - oppgi kilde.
+Kryssreferanser (`article_ref`) rendres som en markør
+`{{ref:<artikkel-id>:<tekst>}}` i den rå teksten - se `resolve_refs()`.
+Hver konsument erstatter markøren med sitt eget lenkeformat helt til
+slutt (etter escaping), siden StarDict og Quarto trenger ulik syntaks.
+
+Lisens på dataene: CC-BY 4.0 (UiB/Språkrådet, og Nasjonalbiblioteket for
+Norsk Ordbank) - oppgi kilde.
 """
 
 from __future__ import annotations
 
+import csv
+import io
 import json
+import re
 import tarfile
+from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterator, Optional
+from typing import Any, Callable, Iterator, Optional
 
 # Vanlige forkortelser/entiteter brukt i etymologi og forklaringer.
 # Listen er satt sammen empirisk (hyppigst brukte id-er i kildedataene) -
@@ -58,13 +71,36 @@ def _fallback_entity(entity_id: str) -> str:
         text = text.replace(src, dst)
     return text.replace("_", " ")
 
-# Ordklassekoder (fra lemma.paradigm_info.tags[0]) -> lesbart navn på norsk.
+
+# Ordklassekoder (fra lemma.paradigm_info.tags[0]) -> lesbart navn på
+# norsk. Kilde: https://ord.uib.no/bm/fil/word_class.json (offisiell
+# kodeliste, felles for bokmål og nynorsk).
 WORD_CLASS_NAMES = {
-    "NOUN": "substantiv", "VERB": "verb", "ADJ": "adjektiv", "ADV": "adverb",
-    "PREP": "preposisjon", "PRON": "pronomen", "DET": "determinativ",
-    "CCONJ": "konjunksjon", "SCONJ": "subjunksjon", "INTJ": "interjeksjon",
-    "SYM": "symbol", "EXPR": "fast uttrykk", "NUM": "tallord",
-    "ABBR": "forkortelse", "MWE": "flerordsuttrykk",
+    "ABBR": "forkorting", "ADJ": "adjektiv", "ADP": "preposisjon",
+    "ADV": "adverb", "CCONJ": "konjunksjon", "COMPPFX": "i sammensetting",
+    "DET": "determinativ", "DET_Q": "tallord", "EXPR": "uttrykk",
+    "INFM": "infinitivsmerke", "INTJ": "interjeksjon", "NOUN": "substantiv",
+    "PFX": "prefiks", "PRON": "pronomen", "PROPN": "egennavn",
+    "SCONJ": "subjunksjon", "SFX": "suffiks", "SYM": "symbol",
+    "UNKN": "ukjent", "VERB": "verb", "VSTEM": "verbstamme",
+}
+
+# Kjønn/tall/grad-koder brukt i bøyingstagger -> lesbart navn.
+GENDER_NAMES = {
+    "Masc": "hankjønn", "Fem": "hunkjønn", "Neuter": "intetkjønn",
+    "Masc/Fem": "felleskjønn",
+}
+
+# Bøyingstagger -> lesbart navn, brukt til å bygge bøyingstabeller.
+TAG_LABELS = {
+    "Sing": "entall", "Plur": "flertall",
+    "Ind": "ubestemt form", "Def": "bestemt form",
+    "Pos": "positiv", "Cmp": "komparativ", "Sup": "superlativ",
+    "Inf": "infinitiv", "Pres": "presens", "Past": "preteritum",
+    "Imp": "imperativ", "Nom": "nominativ", "Acc": "akkusativ",
+    "Pass": "passiv", "<PerfPart>": "perfektum partisipp",
+    "<PresPart>": "presens partisipp", "<SPass>": "s-passiv",
+    **GENDER_NAMES,
 }
 
 
@@ -83,19 +119,65 @@ class Expression:
 
 
 @dataclass
+class InflectionForm:
+    tags: list[str]
+    word_form: str
+
+
+@dataclass
+class InflectionTable:
+    """`kind == "grid"`: 2D-tabell (brukt for substantiv, som på
+    ordbokene.no), med `row_labels`/`col_labels` og `cells[(rad, kol)]`.
+    `kind == "list"`: enkel (merkelapp, bøyd form)-liste, brukt for
+    ordklasser uten en naturlig 2D-tabell (verb, adjektiv m.m.)."""
+
+    kind: str
+    row_labels: list[str] = field(default_factory=list)
+    col_labels: list[str] = field(default_factory=list)
+    cells: dict[tuple[int, int], str] = field(default_factory=dict)
+    rows: list[tuple[str, str]] = field(default_factory=list)
+
+
+@dataclass
 class Article:
     article_id: int
     lemmas: list[str]
+    lemma_display: list[str]
+    word_class_code: str
     word_class: str
     pronunciation: Optional[str]
     etymology: Optional[str]
     senses: list[Sense]
     expressions: list[Expression]
-    inflections: list[str]
+    inflection_forms: list[InflectionForm]
+    inflection_tables: list[tuple[str, InflectionTable]]
 
     @property
     def first_letter(self) -> str:
         return letter_bucket(self.lemmas[0] if self.lemmas else "")
+
+    @property
+    def inflection_word_forms(self) -> list[str]:
+        """Flat, deduplisert liste av alle bøyde former (uavhengig av
+        tabellstruktur) - brukt som ekstra oppslagsord i StarDict."""
+        seen = set(self.lemmas)
+        out = []
+        for infl in self.inflection_forms:
+            if infl.word_form not in seen:
+                seen.add(infl.word_form)
+                out.append(infl.word_form)
+        return out
+
+
+_ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+
+def _lemma_display_text(lemma: str, hgno: int) -> str:
+    """Legger til homografnummer som romertall, f.eks. "trolle (I)",
+    slik ordbokene.no viser det når samme staving har flere artikler."""
+    if lemma and 1 <= hgno < len(_ROMAN):
+        return f"{lemma} ({_ROMAN[hgno]})"
+    return lemma
 
 
 def letter_bucket(lemma: str) -> str:
@@ -104,6 +186,23 @@ def letter_bucket(lemma: str) -> str:
         return "0-9"
     ch = lemma[0].upper()
     return ch if ch.isalpha() else "0-9"
+
+
+# --- Kryssreferanser -------------------------------------------------
+#
+# `{{ref:<artikkel-id>:<tekst>}}` er en intern markør som overlever
+# escaping (ingen av tegnene `{`, `}`, `:` er i noen escape-tabell), og
+# løses til et faktisk lenkeformat helt til slutt av hver konsument.
+
+_REF_RE = re.compile(r"\{\{ref:(\d+):(.*?)\}\}")
+
+
+def resolve_refs(text: str, resolver: Callable[[int, str], str]) -> str:
+    """Erstatter `{{ref:id:tekst}}`-markører i `text` med
+    `resolver(article_id, tekst)`. Kalles av konsumentene *etter*
+    HTML-/Markdown-escaping, slik at resolver kan sette inn klarert
+    markup (lenker) uten at det blir escapet på nytt."""
+    return _REF_RE.sub(lambda m: resolver(int(m.group(1)), m.group(2)), text)
 
 
 def _render_item(item: dict) -> str:
@@ -115,7 +214,15 @@ def _render_item(item: dict) -> str:
         return item.get("text", "")
     if t == "article_ref":
         lemmas = item.get("lemmas") or []
-        return ", ".join(l.get("lemma", "") for l in lemmas if isinstance(l, dict))
+        text = ", ".join(
+            _lemma_display_text(l.get("lemma", ""), l.get("hgno", 0) or 0)
+            for l in lemmas
+            if isinstance(l, dict)
+        )
+        article_id = item.get("article_id")
+        if text and article_id is not None:
+            return f"{{{{ref:{article_id}:{text}}}}}"
+        return text
     if t == "lemma":
         return item.get("lemma", "")
     # Ukjent elementtype: bruk tekst/id hvis det finnes, ellers tomt.
@@ -233,30 +340,90 @@ def _word_class_code(lemma_obj: dict) -> str:
     return ""
 
 
-def _inflections(lemma_obj: dict) -> list[str]:
-    forms: list[str] = []
+def _gender_code(lemma_obj: dict) -> Optional[str]:
+    for pinfo in lemma_obj.get("paradigm_info", []) or []:
+        for tag in pinfo.get("tags") or []:
+            if tag in GENDER_NAMES:
+                return tag
+    return None
+
+
+def _inflection_forms(lemma_obj: dict) -> list[InflectionForm]:
+    forms: list[InflectionForm] = []
     for pinfo in lemma_obj.get("paradigm_info", []) or []:
         for infl in pinfo.get("inflection", []) or []:
             wf = infl.get("word_form")
             if wf:
-                forms.append(wf)
+                forms.append(InflectionForm(tags=infl.get("tags", []) or [], word_form=wf))
     return forms
+
+
+def _build_inflection_table(word_class_code: str, forms: list[InflectionForm]) -> Optional[InflectionTable]:
+    if not forms:
+        return None
+
+    if word_class_code == "NOUN":
+        grid: dict[tuple[str, str], str] = {}
+        for infl in forms:
+            tags = set(infl.tags)
+            col = "flertall" if "Plur" in tags else "entall" if "Sing" in tags else None
+            row = "bestemt form" if "Def" in tags else "ubestemt form" if "Ind" in tags else None
+            if col and row:
+                grid[(row, col)] = infl.word_form
+        if grid:
+            rows = ["ubestemt form", "bestemt form"]
+            cols = ["entall", "flertall"]
+            cells = {
+                (r_i, c_i): grid[(r, c)]
+                for r_i, r in enumerate(rows)
+                for c_i, c in enumerate(cols)
+                if (r, c) in grid
+            }
+            if cells:
+                return InflectionTable(kind="grid", row_labels=rows, col_labels=cols, cells=cells)
+
+    # Fallback for andre ordklasser (verb, adjektiv, pronomen m.m.): en
+    # enkel (merkelapp, bøyd form)-liste i stedet for en 2D-tabell, siden
+    # disse paradigmene ikke har en naturlig entall/flertall-grid.
+    rows: list[tuple[str, str]] = []
+    seen = set()
+    for infl in forms:
+        label = " ".join(TAG_LABELS.get(t, t) for t in infl.tags) or "-"
+        key = (label, infl.word_form)
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append((label, infl.word_form))
+    return InflectionTable(kind="list", rows=rows) if rows else None
 
 
 def parse_article(raw: dict) -> Article:
     lemma_objs = raw.get("lemmas", []) or []
     lemmas = [l.get("lemma", "") for l in lemma_objs if l.get("lemma")]
+    lemma_display = [
+        _lemma_display_text(l.get("lemma", ""), l.get("hgno", 0) or 0)
+        for l in lemma_objs
+        if l.get("lemma")
+    ]
 
     word_class_code = _word_class_code(lemma_objs[0]) if lemma_objs else ""
     word_class = WORD_CLASS_NAMES.get(word_class_code, word_class_code.lower())
+    if word_class_code == "NOUN":
+        gender_code = _gender_code(lemma_objs[0]) if lemma_objs else None
+        if gender_code:
+            word_class = f"{word_class} ({GENDER_NAMES[gender_code]})"
 
-    seen = set(lemmas)
-    inflections: list[str] = []
+    # Bøyingstabell bygges PER stavemåte (lemma_obj) - en artikkel kan ha
+    # flere alternative stavemåter (f.eks. "skår"/"score"), hver med sitt
+    # eget fullstendige bøyingsparadigme som ikke skal blandes sammen.
+    inflection_forms: list[InflectionForm] = []
+    inflection_tables: list[tuple[str, InflectionTable]] = []
     for l in lemma_objs:
-        for form in _inflections(l):
-            if form not in seen:
-                seen.add(form)
-                inflections.append(form)
+        forms = _inflection_forms(l)
+        inflection_forms.extend(forms)
+        table = _build_inflection_table(word_class_code, forms)
+        if table:
+            inflection_tables.append((l.get("lemma", ""), table))
 
     body = raw.get("body") or {}
     senses = _render_definitions(body.get("definitions", []))
@@ -265,12 +432,15 @@ def parse_article(raw: dict) -> Article:
     return Article(
         article_id=raw.get("article_id"),
         lemmas=lemmas,
+        lemma_display=lemma_display,
+        word_class_code=word_class_code,
         word_class=word_class,
         pronunciation=_render_content_list(body.get("pronunciation", []) or []),
         etymology=_render_content_list(body.get("etymology", []) or []),
         senses=senses,
         expressions=expressions,
-        inflections=inflections,
+        inflection_forms=inflection_forms,
+        inflection_tables=inflection_tables,
     )
 
 
@@ -287,3 +457,35 @@ def iterate_articles(tar_path: Path) -> Iterator[Article]:
             if not raw.get("lemmas") or not raw.get("article_id"):
                 continue
             yield parse_article(raw)
+
+
+# --- Norsk Ordbank (Språkbanken/NB) - sammensetningsanalyse ----------
+#
+# Bøyingsdata i Norsk Ordbank overlapper det vi allerede får fra
+# article.tar.gz (samme kilde), så vi bruker den *kun* til
+# sammensetningsanalyse (`leddanalyse.txt`), som ikke finnes i
+# Ordbøkene-artiklene. Se https://www.nb.no/sprakbanken/ressurskatalog/
+# (oai-nb-no-sbr-5 for bokmål, oai-nb-no-sbr-41 for nynorsk).
+
+
+def load_compound_analysis(tar_path: Path) -> dict[str, list[str]]:
+    """Leser `leddanalyse.txt` fra en Norsk Ordbank-tar.gz og bygger en
+    oppslagstabell fra lemma (små bokstaver) til formaterte
+    sammensetningsanalyser (f.eks. "troll + mann"). Enkle former uten
+    forledd/etterledd ("simplex") hoppes over."""
+    compounds: dict[str, list[str]] = defaultdict(list)
+    with tarfile.open(tar_path, mode="r:gz") as tar:
+        f = tar.extractfile("leddanalyse.txt")
+        if f is None:
+            return {}
+        reader = csv.DictReader(io.TextIOWrapper(f, encoding="iso-8859-1"), delimiter="\t")
+        for row in reader:
+            forledd = (row.get("FORLEDD") or "").strip()
+            etterledd = (row.get("ETTERLEDD") or "").strip()
+            word = (row.get("OPPSLAG") or "").strip().lower()
+            if not forledd or not etterledd or not word:
+                continue
+            analysis = f"{forledd} + {etterledd}"
+            if analysis not in compounds[word]:
+                compounds[word].append(analysis)
+    return dict(compounds)

@@ -9,8 +9,10 @@ Boka inneholder alle artikler, med:
 
 - ordklasse, uttale og opphav (etymologi) der det finnes
 - nummererte betydninger og eksempler
-- bøyningsformer
-- faste uttrykk (idiomer)
+- bøyingstabeller (entall/flertall × ubestemt/bestemt for substantiv)
+- faste uttrykk (idiomer) og kryssreferanser til andre artikler
+- sammensetningsanalyse (f.eks. "troll + mann") der det finnes, fra
+  Norsk Ordbank
 
 Bruk søkefeltet øverst på siden, eller bla deg gjennom kapitlene
 (ett per bokstav) under **Bokmålsordboka** og **Nynorskordboka** i
@@ -23,7 +25,10 @@ PDF/EPUB for offline lesing? Se [Last ned](nedlasting.qmd).
 
 Data er hentet fra <https://ord.uib.no/ord_1_Ordlister.html> og er
 lisensiert under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.no)
-av Universitetet i Bergen og Språkrådet. Oppgi kilde ved videre bruk.
+av Universitetet i Bergen og Språkrådet. Sammensetningsanalysen er fra
+[Norsk Ordbank](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-5/)
+(Nasjonalbiblioteket/Språkbanken), også CC-BY 4.0. Oppgi kilde ved videre
+bruk.
 
 Denne boka og tilhørende StarDict-filer genereres automatisk av
 [GitHub Actions-workflowene](https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/actions)
