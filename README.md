@@ -122,6 +122,14 @@ Kjører uavhengig av StarDict-jobben, kl. 07:00 UTC 1. i hver måned:
    (samme artikkel-id kan eksistere uavhengig i både bm og nn). Å dele
    opp per målform løser ID-kollisjonen fullstendig; `search: false` er
    også satt i begge `_quarto.yml` for å holde minnebruken nede.
+   Selv med disse to tiltakene gikk ett bygg av Bokmålsordboka alene
+   (~97 000 artikler, 32 kapitler) tom for minne i en avsluttende,
+   bok-omfattende fase (etter at alle enkeltkapitler var ferdig
+   rendret) - Quartos Deno-prosess bruker som standard en V8-heap-grense
+   på ~8 GB, uavhengig av at `ubuntu-latest` på et offentlig repo faktisk
+   har 16 GB RAM tilgjengelig. `QUARTO_DENO_V8_OPTIONS:
+   --max-old-space-size=14336` er satt på jobb-nivå for å løfte denne
+   grensen og bruke mer av det som faktisk er tilgjengelig på runneren.
 4. Bygger PDF og EPUB av hver bok (`--to pdf` / `--to epub`) som egne
    steg med `continue-on-error: true`. Bøkene er store, så disse kan i
    sjeldne tilfeller mislykkes (f.eks. pga. minnebruk i LaTeX) - da

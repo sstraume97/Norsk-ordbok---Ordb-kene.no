@@ -21,6 +21,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    env:
+      # ubuntu-latest på et offentlig repo har 16 GB RAM, men Quartos
+      # Deno-prosess bruker som standard en V8-heap-grense på ~8 GB
+      # uavhengig av dette. Boka er stor nok til at rendering av alle
+      # kapitlene i én bok (selv med search:false, se book/bm/_quarto.yml)
+      # kan gå tom for minne i en avsluttende bok-omfattende fase (etter
+      # at alle enkeltkapitler er ferdig rendret). Løfter grensen for å
+      # bruke mer av det som faktisk er tilgjengelig på runneren.
+      QUARTO_DENO_V8_OPTIONS: --max-old-space-size=14336
     steps:
       - name: Sjekk ut repo
         uses: actions/checkout@v4
