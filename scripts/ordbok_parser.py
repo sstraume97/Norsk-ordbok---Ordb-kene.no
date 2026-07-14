@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-Delt parsing-modul for Ordbøkene-artikler (ord.uib.no) og Norsk Ordbank
+Parsing-modul for Ordbøkene-artikler (ord.uib.no) og Norsk Ordbank
 (Språkbanken/Nasjonalbiblioteket).
 
 Leser `article.tar.gz` (ett `article/<id>.json` per artikkel, verifisert
 mot ekte data fra UiB) og bygger en enkel, gjenbrukbar `Article`-struktur
-som både `ordbok_til_stardict.py` (StarDict) og `ordbok_til_quarto.py`
-(Quarto-bok) bygger videre på. All rekursiv tolkning av `body`-elementer
-(definisjoner, eksempler, faste uttrykk, bøyningsformer, kryssreferanser)
-skjer her, slik at de to konsumentene ikke dupliserer denne logikken.
+som `ordbok_til_stardict.py` bygger videre på. All rekursiv tolkning av
+`body`-elementer (definisjoner, eksempler, faste uttrykk,
+bøyningsformer, kryssreferanser) skjer her.
 
 Skjemaet er ikke offentlig dokumentert i detalj - det er utledet empirisk
 fra ekte artikler (f.eks. https://ord.uib.no/bm/article/54131.json og
@@ -18,9 +17,9 @@ Ukjente/uventede elementtyper ignoreres stille i stedet for å feile,
 siden ordboka er stor og har mange kant-tilfeller.
 
 Kryssreferanser (`article_ref`) rendres som en markør
-`{{ref:<artikkel-id>:<tekst>}}` i den rå teksten - se `resolve_refs()`.
-Hver konsument erstatter markøren med sitt eget lenkeformat helt til
-slutt (etter escaping), siden StarDict og Quarto trenger ulik syntaks.
+`{{ref:<artikkel-id>:<tekst>}}` i den rå teksten - se `resolve_refs()`,
+som erstatter markøren med endelig visningsform helt til slutt (etter
+escaping).
 
 Lisens på dataene: CC-BY 4.0 (UiB/Språkrådet, og Nasjonalbiblioteket for
 Norsk Ordbank) - oppgi kilde.

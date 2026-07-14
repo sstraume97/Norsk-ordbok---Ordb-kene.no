@@ -27,8 +27,7 @@ grunnordet. Bøyingsformer vises også som en tabell/liste i definisjonen
 (entall/flertall x ubestemt/bestemt for substantiv, ellers en enkel
 liste), og kryssreferanser (f.eks. "trolle (I)") vises i kursiv.
 
-All parsing av selve artikkelstrukturen skjer i den delte modulen
-`ordbok_parser.py`, som også brukes av `ordbok_til_quarto.py`.
+All parsing av selve artikkelstrukturen skjer i `ordbok_parser.py`.
 
 Lisens på dataene: CC-BY 4.0 (UiB/Språkrådet, og Nasjonalbiblioteket for
 Norsk Ordbank) - oppgi kilde.

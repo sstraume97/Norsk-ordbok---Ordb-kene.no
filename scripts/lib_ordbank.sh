@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Delt hjelpefunksjon for å hente Norsk Ordbank (Språkbanken/NB) - brukes
-# av scripts/build.sh og .github/workflows/quarto-book.yml for å hente
-# sammensetningsanalyse (leddanalyse.txt, se scripts/ordbok_parser.py).
+# Hjelpefunksjon for å hente Norsk Ordbank (Språkbanken/NB) - brukes av
+# scripts/build.sh for å hente sammensetningsanalyse (leddanalyse.txt,
+# se scripts/ordbok_parser.py).
 #
 # Beste innsats: feiler stille (lager ikke filen, men returnerer 0) hvis
 # nedlasting mislykkes, siden dette bare er en supplerende berikelse -

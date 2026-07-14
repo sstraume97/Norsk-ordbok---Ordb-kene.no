@@ -2,25 +2,6 @@
 tmp/
 dist/
 
-# Genereres av scripts/ordbok_til_quarto.py hver kjøring - bm/ og nn/ er
-# egne Quarto-bokprosjekter (_quarto.yml/index.qmd/nedlasting.qmd
-# committes), men selve kapitlene (ett per bokstav) genereres på nytt
-# hver gang og skal ikke committes.
-book/bm/[a-z].qmd
-book/bm/æ.qmd
-book/bm/ø.qmd
-book/bm/å.qmd
-book/bm/0-9.qmd
-book/bm/_book/
-book/bm/.quarto/
-book/nn/[a-z].qmd
-book/nn/æ.qmd
-book/nn/ø.qmd
-book/nn/å.qmd
-book/nn/0-9.qmd
-book/nn/_book/
-book/nn/.quarto/
-
 # Python
 __pycache__/
 *.pyc

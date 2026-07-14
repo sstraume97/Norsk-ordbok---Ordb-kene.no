@@ -2,8 +2,7 @@
 
 Automatisk genererte StarDict-ordbøker (`.ifo`/`.idx`/`.dict.dz`/`.syn`) av
 Bokmålsordboka og Nynorskordboka fra [Ordbøkene.no](https://ordbokene.no),
-samt to nettleselige/nedlastbare [Quarto](https://quarto.org)-bøker (én
-per målform) med hele ordboka. Alt bygges **månedlig** med GitHub Actions.
+bygget **månedlig** med GitHub Actions.
 
 ## Hvordan det henger sammen
 
@@ -22,22 +21,24 @@ Data hentes fra UiBs offisielle nedlastingsside for ordlister
   UiBs servere når hele datasettet allerede ligger klart som fil.
 
 All parsing av selve artikkelstrukturen (rekursiv tolkning av
-definisjoner, eksempler, faste uttrykk/idiomer, bøyningsformer,
-kryssreferanser) ligger i én delt modul, `scripts/ordbok_parser.py`, som
-både StarDict- og Quarto-genereringen bygger videre på. Dette gir samme
+definisjoner, eksempler, faste uttrykk/idiomer, bøyingsformer,
+kryssreferanser) ligger i `scripts/ordbok_parser.py`. Dette gir samme
 detaljnivå som selve ordbokene.no:
 
-- **Bøyingstabell**, ikke bare en flat liste: substantiv får en ekte
-  entall/flertall × ubestemt/bestemt-tabell (som på ordbokene.no), andre
-  ordklasser (verb, adjektiv m.m.) får en enkel merkelapp/bøyd-form-liste.
-  Ordklassenavn og bøyingsmerkelapper er hentet fra UiBs offisielle
-  kodelister (`word_class.json`/`sub_word_class.json`).
+- **Bøyingstabell**, ikke bare en flat liste: substantiv får en tabell med
+  entall/flertall som kolonnegrupper og ubestemt/bestemt form som
+  underkolonner (som på ordbokene.no, inkl. kjønnsartikkel foran ubestemt
+  entallsform, f.eks. "et håp"), andre ordklasser (verb, adjektiv m.m.)
+  får en enkel merkelapp/bøyd-form-liste. Ordklassenavn og
+  bøyingsmerkelapper er hentet fra UiBs offisielle kodelister
+  (`word_class.json`/`sub_word_class.json`).
 - **Kryssreferanser** (f.eks. "trolle (I)", med homografnummer som
-  romertall) blir ekte klikkbare lenker i Quarto-boka, og kursiv tekst i
-  StarDict.
+  romertall) vises i kursiv.
 - **Sammensetningsanalyse** (f.eks. "troll + mann" for "trollmann") hentes
-  fra **Norsk Ordbank** (Nasjonalbiblioteket/Språkbanken) - se eget avsnitt
-  under.
+  fra **Norsk Ordbank** (Nasjonalbiblioteket/Språkbanken) og vises i en
+  egen, tydelig atskilt seksjon nederst i definisjonen (delelinje + egen
+  tittel "Fra Norsk Ordbank"), siden det er en annen kilde enn selve
+  Ordbøkene-artikkelen - se eget avsnitt under.
 
 ### Norsk Ordbank (sammensetningsanalyse)
 
@@ -52,12 +53,12 @@ sammensetning er bygget av), som ikke finnes i Ordbøkene-artiklene.
 `scripts/lib_ordbank.sh` finner og laster ned siste tilgjengelige
 tar.gz-fil for hvert målform automatisk (filnavnene er datostemplet, så
 vi henter alltid det nyeste treffet fra ressurskatalogsiden). Dette er
-**beste innsats**: begge byggejobbene fortsetter uten
-sammensetningsanalyse hvis nedlastingen skulle mislykkes, siden det bare
-er en supplerende berikelse - ikke kjernedata. Lisens: CC-BY 4.0
+**beste innsats**: byggejobben fortsetter uten sammensetningsanalyse hvis
+nedlastingen skulle mislykkes, siden det bare er en supplerende
+berikelse - ikke kjernedata. Lisens: CC-BY 4.0
 (Nasjonalbiblioteket/Språkrådet/Universitetet i Bergen).
 
-### StarDict - `.github/workflows/Build.yml`
+## Workflow - `.github/workflows/Build.yml`
 
 1. Kjører kl. 05:00 UTC 1. i hver måned (og kan trigges manuelt via
    "Run workflow").
@@ -85,7 +86,7 @@ er en supplerende berikelse - ikke kjernedata. Lisens: CC-BY 4.0
 5. `state/*.sha256` committes tilbake til repoet, slik at neste kjøring
    vet om noe har endret seg.
 
-#### Nedlastingslenker
+### Nedlastingslenker
 
 Hver release inneholder fire filer: `bm-stardict.zip`/`nn-stardict.zip`
 (faste navn) og daterte kopier `bm-stardict-ÅÅÅÅ-MM-DD.zip`/
@@ -102,73 +103,18 @@ https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases/latest/downlo
 Vil du ha en bestemt tidligere utgave, bruk den daterte filen fra
 [Releases](../../releases) i stedet.
 
-### Quarto-bok - `.github/workflows/quarto-book.yml`
-
-Kjører uavhengig av StarDict-jobben, kl. 07:00 UTC 1. i hver måned:
-
-1. Laster ned `article.tar.gz` for `bm` og `nn` på nytt (egen kopi, ikke
-   avhengig av at StarDict-jobben har kjørt).
-2. `scripts/ordbok_til_quarto.py` genererer ett Quarto-kapittel per
-   bokstav (A-Å + "0-9") i `book/bm/` og `book/nn/` - disse er generert
-   innhold og committes ikke (se `.gitignore`).
-3. Bygger **to separate** nettsteder - `quarto render book/bm --to html`
-   og `quarto render book/nn --to html` - **disse to stegene må
-   lykkes**, ellers feiler jobben. Bokmålsordboka og Nynorskordboka er
-   bevisst to uavhengige Quarto-bokprosjekter, ikke ett kombinert: en
-   tidligere versjon med én bok for begge målformer (~220 000
-   oppslagsord i ett prosjekt) gikk tom for minne under rendering
-   (Deno/V8-heap på ~8 GB) etter over en time, og hadde i tillegg et
-   bug med kolliderende kryssreferanse-ID-er på tvers av målformene
-   (samme artikkel-id kan eksistere uavhengig i både bm og nn). Å dele
-   opp per målform løser ID-kollisjonen fullstendig; `search: false` er
-   også satt i begge `_quarto.yml` for å holde minnebruken nede.
-   Selv med disse to tiltakene gikk ett bygg av Bokmålsordboka alene
-   (~97 000 artikler, 32 kapitler) tom for minne i en avsluttende,
-   bok-omfattende fase (etter at alle enkeltkapitler var ferdig
-   rendret) - Quartos Deno-prosess bruker som standard en V8-heap-grense
-   på ~8 GB, uavhengig av at `ubuntu-latest` på et offentlig repo faktisk
-   har 16 GB RAM tilgjengelig. `QUARTO_DENO_V8_OPTIONS:
-   --max-old-space-size=14336` er satt på jobb-nivå for å løfte denne
-   grensen og bruke mer av det som faktisk er tilgjengelig på runneren.
-4. Bygger PDF og EPUB av hver bok (`--to pdf` / `--to epub`) som egne
-   steg med `continue-on-error: true`. Bøkene er store, så disse kan i
-   sjeldne tilfeller mislykkes (f.eks. pga. minnebruk i LaTeX) - da
-   hopper vi bare over dem for denne måneden i stedet for å blokkere
-   nettsidepubliseringen. Forrige måneds PDF/EPUB blir da liggende
-   urørt på siden til neste vellykkede bygg.
-5. Setter sammen `site/` (`book/index.html` som forside, pluss
-   `book/bm/_book/` → `site/bm/` og `book/nn/_book/` → `site/nn/`) og
-   publiserer det til GitHub Pages.
-
-Forsiden (`book/index.html`, en enkel statisk side - ikke en egen
-Quarto-bok) lenker til hver av de to bøkene. Hver bok har sin egen
-[Last ned](book/bm/nedlasting.qmd)-side med lenker til sin StarDict-fil
-og sin egen PDF/EPUB.
-
-**Engangsoppsett:** for at Pages-publiseringen skal virke må du sette
-**Settings → Pages → Source: GitHub Actions** i repoet. Dette er en
-repo-innstilling som må gjøres manuelt i GitHub-grensesnittet.
-
 ## Kildekode
 
-- `scripts/ordbok_parser.py` - delt parsing av `article.tar.gz` til en
+- `scripts/ordbok_parser.py` - parsing av `article.tar.gz` til en
   `Article`-struktur (lemmaer m/homografnummer, ordklasse, uttale,
   etymologi, betydninger, faste uttrykk, bøyingstabeller,
   kryssreferanse-markører), samt lasting av Norsk Ordbanks
   sammensetningsanalyse.
 - `scripts/ordbok_til_stardict.py` - `Article` → PyGlossary-tabfile
   (HTML-formatert definisjon, med bøyingstabell som HTML-tabell).
-- `scripts/ordbok_til_quarto.py` - `Article` → Quarto-kapitler
-  (Markdown, med bøyingstabell som Markdown-tabell og ekte
-  kryssreferanselenker), gruppert alfabetisk.
 - `scripts/build.sh` - orkestrerer nedlasting, endringssjekk og
   StarDict-bygg.
-- `scripts/lib_ordbank.sh` - delt hjelpefunksjon for å hente Norsk
-  Ordbank (brukes av `build.sh` og `quarto-book.yml`).
-- `book/index.html` - statisk forside som lenker til de to bøkene.
-- `book/bm/`, `book/nn/` - to separate Quarto-bokprosjekter (egen
-  `_quarto.yml`/`index.qmd`/`nedlasting.qmd` per målform, samt generert
-  kapittelinnhold som ikke committes).
+- `scripts/lib_ordbank.sh` - henter Norsk Ordbank (brukt av `build.sh`).
 
 ## Lisens på dataene
 
