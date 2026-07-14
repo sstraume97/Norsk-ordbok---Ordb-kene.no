@@ -1,3 +1,5 @@
+![Banner](assets/banner-a-navy-lupe.svg)
+
 # ordboker-stardict
 
 Automatisk genererte StarDict-ordbøker (`.ifo`/`.idx`/`.dict.dz`/`.syn`) av
