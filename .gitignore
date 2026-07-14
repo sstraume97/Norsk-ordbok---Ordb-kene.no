@@ -1,0 +1,13 @@
+# Genereres av scripts/build.sh og GitHub Actions - ikke commit disse.
+tmp/
+dist/
+
+# Genereres av scripts/ordbok_til_quarto.py hver kjøring.
+book/bm/
+book/nn/
+book/_book/
+book/.quarto/
+
+# Python
+__pycache__/
+*.pyc

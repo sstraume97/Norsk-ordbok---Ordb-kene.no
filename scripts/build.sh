@@ -15,6 +15,8 @@ set -euo pipefail
 
 declare -A NAMES=( ["bm"]="Bokmålsordboka" ["nn"]="Nynorskordboka" )
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 mkdir -p dist tmp state
 
 CHANGED=false
@@ -39,3 +41,26 @@ fi
 
 if [ "${CHANGED}" = false ]; then
     echo "Ingen endringer i datagrunnlaget hos ord.uib.no - hopper over bygg."
+    exit 0
+fi
+
+for d in bm nn; do
+    navn="${NAMES[$d]}"
+    echo "== ${d}: konverterer til tabfile =="
+    python3 "${SCRIPT_DIR}/ordbok_til_stardict.py" "tmp/${d}.tar.gz" "tmp/${d}.txt"
+
+    echo "== ${d}: bygger StarDict med pyglossary =="
+    rm -rf "tmp/${d}-stardict"
+    mkdir -p "tmp/${d}-stardict"
+    pyglossary "tmp/${d}.txt" "tmp/${d}-stardict/${d}.ifo" \
+        --read-format=Tabfile --write-format=Stardict \
+        --write-options 'dictzip=True' \
+        --name "${navn}"
+
+    echo "== ${d}: zipper =="
+    (cd "tmp/${d}-stardict" && zip -q -r "../../dist/${d}-stardict.zip" .)
+
+    mv "tmp/${d}.sha256.new" "state/${d}.sha256"
+done
+
+echo "Ferdig. Nye filer i dist/: $(ls dist)"

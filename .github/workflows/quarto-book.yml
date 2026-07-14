@@ -1,0 +1,83 @@
+name: Bygg og publiser Quarto-bok
+
+on:
+  schedule:
+    # Kl. 07:00 UTC 1. i hver måned - to timer etter StarDict-bygget
+    # (Build.yml). De to workflowene er uavhengige av hverandre; dette er
+    # bare et praktisk tidsvalg for å unngå at begge kjører samtidig.
+    - cron: '0 7 1 * *'
+  workflow_dispatch: {}   # tillat manuell kjøring fra Actions-fanen
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Sjekk ut repo
+        uses: actions/checkout@v4
+
+      - name: Sett opp Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Last ned artikkeldata
+        run: |
+          mkdir -p tmp
+          curl -sSL --fail -o tmp/bm.tar.gz https://ord.uib.no/bm/fil/article.tar.gz
+          curl -sSL --fail -o tmp/nn.tar.gz https://ord.uib.no/nn/fil/article.tar.gz
+
+      - name: Generer Quarto-kapitler
+        run: |
+          python3 scripts/ordbok_til_quarto.py tmp/bm.tar.gz book/bm "Bokmålsordboka"
+          python3 scripts/ordbok_til_quarto.py tmp/nn.tar.gz book/nn "Nynorskordboka"
+
+      - name: Sett opp Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Installer TinyTeX (for PDF)
+        run: quarto install tinytex --no-prompt
+
+      - name: Render HTML (må lykkes)
+        run: quarto render book --to html
+
+      - name: Render PDF (beste innsats - hopper over ved feil)
+        id: pdf
+        continue-on-error: true
+        run: quarto render book --to pdf
+
+      - name: Render EPUB (beste innsats - hopper over ved feil)
+        id: epub
+        continue-on-error: true
+        run: quarto render book --to epub
+
+      - name: Oppsummer PDF/EPUB-status
+        if: always()
+        run: |
+          echo "PDF:  ${{ steps.pdf.outcome }}"
+          echo "EPUB: ${{ steps.epub.outcome }}"
+
+      - name: Last opp Pages-artefakt
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: book/_book
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publiser til GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
