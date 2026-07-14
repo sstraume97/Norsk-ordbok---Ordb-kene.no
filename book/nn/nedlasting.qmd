@@ -1,0 +1,21 @@
+# Last ned {.unnumbered}
+
+## StarDict (for GoldenDict o.a.)
+
+Blir bygd og publisert månadleg av ein eigen workflow. Lenka under peikar
+alltid til siste utgåve:
+
+- [Nynorskordboka (StarDict)](https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases/latest/download/nn-stardict.zip)
+
+Alle tidlegare utgåver ligg under [Releases](https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases).
+
+## Denne boka som PDF/EPUB
+
+- [Last ned som PDF](Nynorskordboka.pdf)
+- [Last ned som EPUB](Nynorskordboka.epub)
+
+Boka er stor (alle artiklar i Nynorskordboka), så PDF/EPUB-bygget kan i
+sjeldne tilfelle mislykkast for ein gitt månad (t.d. pga. minnebruk i
+LaTeX). Nettsida blir publisert uansett - viss ei nedlastingslenke over
+ikkje verkar, betyr det at førre månads bygg framleis ligg på sida,
+eller at bygget for denne månaden er i gang.

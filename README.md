@@ -2,8 +2,8 @@
 
 Automatisk genererte StarDict-ordbøker (`.ifo`/`.idx`/`.dict.dz`/`.syn`) av
 Bokmålsordboka og Nynorskordboka fra [Ordbøkene.no](https://ordbokene.no),
-samt en nettleselig/nedlastbar [Quarto](https://quarto.org)-bok med hele
-ordboka. Begge bygges **månedlig** med GitHub Actions.
+samt to nettleselige/nedlastbare [Quarto](https://quarto.org)-bøker (én
+per målform) med hele ordboka. Alt bygges **månedlig** med GitHub Actions.
 
 ## Hvordan det henger sammen
 
@@ -97,19 +97,31 @@ Kjører uavhengig av StarDict-jobben, kl. 07:00 UTC 1. i hver måned:
 2. `scripts/ordbok_til_quarto.py` genererer ett Quarto-kapittel per
    bokstav (A-Å + "0-9") i `book/bm/` og `book/nn/` - disse er generert
    innhold og committes ikke (se `.gitignore`).
-3. Bygger nettsiden (`quarto render book --to html`) - **dette steget må
-   lykkes**, ellers feiler jobben.
-4. Bygger PDF og EPUB av hele boka (`--to pdf` / `--to epub`) som egne
-   steg med `continue-on-error: true`. Boka er stor (alle artikler i
-   begge målformer), så disse kan i sjeldne tilfeller mislykkes (f.eks.
-   pga. minnebruk i LaTeX) - da hopper vi bare over dem for denne
-   måneden i stedet for å blokkere nettsidepubliseringen. Forrige
-   måneds PDF/EPUB blir da liggende urørt på siden til neste vellykkede
-   bygg.
-5. Publiserer `book/_book/` til GitHub Pages.
+3. Bygger **to separate** nettsteder - `quarto render book/bm --to html`
+   og `quarto render book/nn --to html` - **disse to stegene må
+   lykkes**, ellers feiler jobben. Bokmålsordboka og Nynorskordboka er
+   bevisst to uavhengige Quarto-bokprosjekter, ikke ett kombinert: en
+   tidligere versjon med én bok for begge målformer (~220 000
+   oppslagsord i ett prosjekt) gikk tom for minne under rendering
+   (Deno/V8-heap på ~8 GB) etter over en time, og hadde i tillegg et
+   bug med kolliderende kryssreferanse-ID-er på tvers av målformene
+   (samme artikkel-id kan eksistere uavhengig i både bm og nn). Å dele
+   opp per målform løser ID-kollisjonen fullstendig; `search: false` er
+   også satt i begge `_quarto.yml` for å holde minnebruken nede.
+4. Bygger PDF og EPUB av hver bok (`--to pdf` / `--to epub`) som egne
+   steg med `continue-on-error: true`. Bøkene er store, så disse kan i
+   sjeldne tilfeller mislykkes (f.eks. pga. minnebruk i LaTeX) - da
+   hopper vi bare over dem for denne måneden i stedet for å blokkere
+   nettsidepubliseringen. Forrige måneds PDF/EPUB blir da liggende
+   urørt på siden til neste vellykkede bygg.
+5. Setter sammen `site/` (`book/index.html` som forside, pluss
+   `book/bm/_book/` → `site/bm/` og `book/nn/_book/` → `site/nn/`) og
+   publiserer det til GitHub Pages.
 
-Nettsiden har en egen [Last ned](book/nedlasting.qmd)-side med lenker
-til siste StarDict-filer og bokas egen PDF/EPUB.
+Forsiden (`book/index.html`, en enkel statisk side - ikke en egen
+Quarto-bok) lenker til hver av de to bøkene. Hver bok har sin egen
+[Last ned](book/bm/nedlasting.qmd)-side med lenker til sin StarDict-fil
+og sin egen PDF/EPUB.
 
 **Engangsoppsett:** for at Pages-publiseringen skal virke må du sette
 **Settings → Pages → Source: GitHub Actions** i repoet. Dette er en
@@ -131,8 +143,10 @@ repo-innstilling som må gjøres manuelt i GitHub-grensesnittet.
   StarDict-bygg.
 - `scripts/lib_ordbank.sh` - delt hjelpefunksjon for å hente Norsk
   Ordbank (brukes av `build.sh` og `quarto-book.yml`).
-- `book/` - Quarto-bokprosjekt (`_quarto.yml`, `index.qmd`,
-  `nedlasting.qmd`, samt generert innhold i `bm/`/`nn/`).
+- `book/index.html` - statisk forside som lenker til de to bøkene.
+- `book/bm/`, `book/nn/` - to separate Quarto-bokprosjekter (egen
+  `_quarto.yml`/`index.qmd`/`nedlasting.qmd` per målform, samt generert
+  kapittelinnhold som ikke committes).
 
 ## Lisens på dataene
 

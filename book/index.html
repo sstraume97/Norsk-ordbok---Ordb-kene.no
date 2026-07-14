@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordbøkene</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 40rem;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+    line-height: 1.6;
+    color: #212529;
+  }
+  h1 { margin-bottom: 0.25rem; }
+  p.lead { color: #495057; margin-top: 0; }
+  .books { display: flex; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; }
+  .book-card {
+    flex: 1 1 14rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease;
+  }
+  .book-card:hover { border-color: #495057; }
+  .book-card h2 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+  .book-card p { margin: 0; color: #495057; font-size: 0.95rem; }
+  footer { margin-top: 3rem; color: #868e96; font-size: 0.85rem; }
+  a { color: #1864ab; }
+</style>
+</head>
+<body>
+  <h1>Ordbøkene</h1>
+  <p class="lead">Automatisk genererte utgaver av Bokmålsordboka og Nynorskordboka fra
+    <a href="https://ordbokene.no">Ordbøkene.no</a>, bygget månedlig fra kildedataene
+    til Universitetet i Bergen (UiB) og Språkrådet.</p>
+
+  <div class="books">
+    <a class="book-card" href="bm/index.html">
+      <h2>Bokmålsordboka</h2>
+      <p>Bla i ordboka, eller last ned som StarDict, PDF eller EPUB.</p>
+    </a>
+    <a class="book-card" href="nn/index.html">
+      <h2>Nynorskordboka</h2>
+      <p>Bla i ordboka, eller last ned som StarDict, PDF eller EPUB.</p>
+    </a>
+  </div>
+
+  <footer>
+    Kjelde: <a href="https://ord.uib.no/ord_1_Ordlister.html">ord.uib.no</a>,
+    CC-BY 4.0 (UiB/Språkrådet). Bygget automatisk med
+    <a href="https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no">GitHub Actions og Quarto</a>.
+  </footer>
+</body>
+</html>

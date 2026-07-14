@@ -1,0 +1,21 @@
+# Last ned {.unnumbered}
+
+## StarDict (for GoldenDict o.l.)
+
+Bygges og publiseres månedlig av en egen workflow. Lenken under peker
+alltid til siste utgave:
+
+- [Bokmålsordboka (StarDict)](https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases/latest/download/bm-stardict.zip)
+
+Alle tidligere utgaver ligger under [Releases](https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/releases).
+
+## Denne boka som PDF/EPUB
+
+- [Last ned som PDF](Bokmålsordboka.pdf)
+- [Last ned som EPUB](Bokmålsordboka.epub)
+
+Boka er stor (alle artikler i Bokmålsordboka), så PDF/EPUB-bygget kan i
+sjeldne tilfeller mislykkes for en gitt måned (f.eks. pga. minnebruk i
+LaTeX). Nettsiden publiseres uansett - hvis en nedlastingslenke over
+ikke virker, betyr det at forrige måneds bygg fortsatt ligger på siden,
+eller at bygget for denne måneden er i gang.

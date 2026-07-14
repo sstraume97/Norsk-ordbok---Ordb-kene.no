@@ -1,9 +1,11 @@
 # Om denne boka {.unnumbered}
 
-Dette er en automatisk generert utgave av **Bokmålsordboka** og
-**Nynorskordboka** fra [Ordbøkene.no](https://ordbokene.no), bygget
-månedlig direkte fra kildedataene til Universitetet i Bergen (UiB) og
-Språkrådet.
+Dette er en automatisk generert utgave av **Bokmålsordboka** fra
+[Ordbøkene.no](https://ordbokene.no), bygget månedlig direkte fra
+kildedataene til Universitetet i Bergen (UiB) og Språkrådet.
+
+Ser du etter **Nynorskordboka**? Den er en egen bok:
+[nynorskordboka.html](../nn/index.html).
 
 Boka inneholder alle artikler, med:
 
@@ -14,9 +16,7 @@ Boka inneholder alle artikler, med:
 - sammensetningsanalyse (f.eks. "troll + mann") der det finnes, fra
   Norsk Ordbank
 
-Bruk søkefeltet øverst på siden, eller bla deg gjennom kapitlene
-(ett per bokstav) under **Bokmålsordboka** og **Nynorskordboka** i
-menyen til venstre.
+Bla deg gjennom kapitlene (ett per bokstav) i menyen til venstre.
 
 Vil du ha ordboka som StarDict-fil (for f.eks. GoldenDict) eller som
 PDF/EPUB for offline lesing? Se [Last ned](nedlasting.qmd).
