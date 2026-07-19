@@ -1,10 +1,16 @@
 ![Banner](assets/banner-a-navy-lupe.svg)
 
-# ordboker-stardict
+# Ordbøkene.no – norsk ordbok i StarDict-format
 
-Automatisk genererte StarDict-ordbøker (`.ifo`/`.idx`/`.dict.dz`/`.syn`) av
-Bokmålsordboka og Nynorskordboka fra [Ordbøkene.no](https://ordbokene.no),
-bygget **månedlig** med GitHub Actions.
+> [!NOTE]
+> **Dette prosjektet er laget med KI-en Claude Code og feil kan således forekomme!**
+> 
+> Undertegnede, [Sondre Bogen-Straume](https://github.com/sstraume97), tar ikke ansvar for eventuelle feil.
+> 
+> **Om du kommer over feil håper jeg du [rapporterer dette her](https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no/issues/new)**
+
+
+Automatisk genererte StarDict-ordbøker (`.ifo`/`.idx`/`.dict.dz`/`.syn`) av Bokmålsordboka og Nynorskordboka fra [Ordbøkene.no](https://ordbokene.no), bygget **månedlig** med GitHub Actions.
 
 ## Hvordan det henger sammen
 
