@@ -1,0 +1,25 @@
+name: "❓ Spørsmål"
+description: Still et spørsmål om prosjektet, dataene eller hvordan noe brukes.
+title: "[Spørsmål]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Har du sjekket [README](../../blob/main/README.md) og [tidligere issues](../../issues?q=is%3Aissue) før du spør? Ofte finnes svaret der allerede.
+
+  - type: textarea
+    id: sporsmal
+    attributes:
+      label: Hva lurer du på?
+      description: Vær så konkret som mulig.
+    validations:
+      required: true
+
+  - type: textarea
+    id: kontekst
+    attributes:
+      label: Kontekst
+      description: Hva prøver du å få til? (F.eks. bruke ordboka i et bestemt program, forstå en del av koden, sette opp bygget selv.)
+    validations:
+      required: false

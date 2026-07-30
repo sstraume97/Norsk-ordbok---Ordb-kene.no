@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 Les README først
+    url: https://github.com/sstraume97/Norsk-ordbok---Ordb-kene.no#readme
+    about: Mange spørsmål besvares allerede i README-en (hvordan bygget fungerer, nedlastingslenker, lisens m.m.).

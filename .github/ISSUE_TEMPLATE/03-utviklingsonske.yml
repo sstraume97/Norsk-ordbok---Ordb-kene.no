@@ -1,0 +1,37 @@
+name: "💡 Utviklingsønske"
+description: Foreslå en ny funksjon eller en forbedring av prosjektet.
+title: "[Ønske]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Hvilket problem løser dette?
+      description: Beskriv situasjonen eller begrensningen som gjør at du ønsker denne endringen.
+      placeholder: F.eks. "Det er ikke mulig å se hvilke ord som ble fjernet mellom to utgivelser uten å laste ned begge og sammenligne manuelt."
+    validations:
+      required: true
+
+  - type: textarea
+    id: forslag
+    attributes:
+      label: Foreslått løsning
+      description: Hva ønsker du skal skje i stedet?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternativer
+    attributes:
+      label: Alternativer du har vurdert
+      description: Andre løsninger eller omveier du har tenkt på.
+    validations:
+      required: false
+
+  - type: textarea
+    id: annet
+    attributes:
+      label: Annen relevant informasjon
+      description: Skjermbilder, eksempler fra andre prosjekter, lenker o.l.
+    validations:
+      required: false

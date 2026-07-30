@@ -1,0 +1,12 @@
+name: "📋 Annet"
+description: Noe som ikke passer inn i de andre kategoriene.
+title: ""
+labels: []
+body:
+  - type: textarea
+    id: beskrivelse
+    attributes:
+      label: Beskrivelse
+      description: Fortell hva denne saken gjelder.
+    validations:
+      required: true

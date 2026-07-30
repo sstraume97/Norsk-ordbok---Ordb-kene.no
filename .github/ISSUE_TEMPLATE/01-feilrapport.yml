@@ -1,0 +1,78 @@
+name: "🐞 Feilrapport"
+description: Meld fra om noe som ikke fungerer som forventet (f.eks. feil i ordboka, ødelagt bygg eller et program som ikke kan åpne filene).
+title: "[Feil]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk for at du melder fra om en feil! Fyll ut så mye som mulig under, det gjør det raskere å finne og rette opp problemet.
+
+  - type: textarea
+    id: beskrivelse
+    attributes:
+      label: Beskriv feilen
+      description: Hva skjedde, og hva forventet du skulle skje i stedet?
+      placeholder: F.eks. "Oppslagsordet 'jamføre' mangler bøyingstabell i StarDict-fila."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: malform
+    attributes:
+      label: Målform
+      description: Hvilken ordbok gjelder feilen?
+      options:
+        - Bokmål
+        - Nynorsk
+        - Begge
+        - Ikke relevant
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduksjon
+    attributes:
+      label: Hvordan kan feilen gjenskapes?
+      description: Trinnvis beskrivelse, gjerne med oppslagsord eller kommando som utløser problemet.
+      placeholder: |
+        1. Last ned bm-stardict.zip fra siste utgivelse
+        2. Slå opp "..."
+        3. Se at ...
+    validations:
+      required: false
+
+  - type: input
+    id: utgivelse
+    attributes:
+      label: Utgivelse/versjon
+      description: Hvilken dato-merket utgivelse (release) gjelder dette, eller commit/branch hvis du kjører lokalt?
+      placeholder: f.eks. bm-stardict-2026-07-01.zip
+    validations:
+      required: false
+
+  - type: input
+    id: program
+    attributes:
+      label: Program og operativsystem
+      description: Hvilket ordbokprogram bruker du (GoldenDict, goldendict-ng, m.m.), og på hvilket OS?
+      placeholder: f.eks. goldendict-ng 24.x på Windows 11
+    validations:
+      required: false
+
+  - type: textarea
+    id: logger
+    attributes:
+      label: Feilmeldinger/logg
+      description: Lim inn relevante feilmeldinger, f.eks. fra GitHub Actions-loggen for bygget.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: annet
+    attributes:
+      label: Annen relevant informasjon
+      description: Skjermbilder, lenker eller annet som kan hjelpe.
+    validations:
+      required: false
