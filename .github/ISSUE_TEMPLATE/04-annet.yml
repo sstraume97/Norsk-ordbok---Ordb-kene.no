@@ -1,7 +1,7 @@
 name: "📋 Annet"
 description: Noe som ikke passer inn i de andre kategoriene.
-title: ""
-labels: []
+title: "[Spørsmål]: "
+labels: [spørsmål]
 body:
   - type: textarea
     id: beskrivelse
