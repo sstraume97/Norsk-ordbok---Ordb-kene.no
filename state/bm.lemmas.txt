@@ -26003,11 +26003,11 @@ følge en til døra
 følge en til graven
 følge med
 følge med på kjøpet
-følge med strømmen
 følge opp
 følge på
 følge sitt eget hode
 følge stimen
+følge strømmen
 følgebil
 følgebrev
 følgefeil
@@ -77046,6 +77046,7 @@ skadeild
 skadeinsekt
 skadelidd
 skadelidende
+skadelidt
 skadelig
 skadeliste
 skademelding
@@ -96655,6 +96656,7 @@ undertall
 undertallig
 undertann
 undertegne
+undertegnede
 undertegner
 undertekst
 undertelne
