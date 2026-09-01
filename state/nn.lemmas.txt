@@ -958,6 +958,7 @@ U-landskamp
 U-landslag
 U-stål
 U-sving
+U-verdi
 UD
 URL
 US-
@@ -1155,6 +1156,7 @@ Zr
 [setje|gjere] i stand
 [setje|slå] ein strek over
 [setje|spenne] krokfot
+[setje|stikke] spaden i jorda
 [setje|stille] lyset sitt under ei skjeppe
 [setje|stille] saka på hovudet
 [sett|høyrt] på maken!
@@ -2714,6 +2716,8 @@ anbodsfrist
 anbodsinnbyding
 anbodskonkurranse
 anbodsrunde
+anbrot
+anbrott
 anbydar
 and
 and-
@@ -4046,6 +4050,7 @@ arverekke
 arverekkje
 arverett
 arveskifte
+arvespråk
 arvestoff
 arvestykke
 arvesylv
@@ -6261,6 +6266,7 @@ bankopplysning
 bankoverføring
 bankpolitikk
 bankran
+bankranar
 bankremisse
 bankrente
 banksamband
@@ -7322,6 +7328,7 @@ bergveronika
 beriberi
 berike
 berike seg
+beriking
 berje
 berje floke
 berke
@@ -9352,6 +9359,7 @@ bolle
 bolle seg
 bolledeig
 bollekinn
+bolleklipp
 bollesett
 bolne
 bolse
@@ -9505,10 +9513,15 @@ bonmot
 bonsai
 bonsaitre
 bonus
+bonus-
 bonusbarn
+bonusbarnebarn
+bonusfamilie
 bonusfar
+bonusmamma
 bonusmor
 bonusordning
+bonuspappa
 bonuspoeng
 boogie
 boogiewoogie
@@ -9519,6 +9532,7 @@ boolsk
 boolsk algebra
 boom
 booster
+bootleg
 boots
 bor
 boraks
@@ -11518,6 +11532,7 @@ byggeelement
 byggefelt
 byggeforbod
 byggeforskrift
+byggegrunn
 byggeklar
 byggekloss
 byggekomite
@@ -11578,6 +11593,7 @@ byggjeelement
 byggjefelt
 byggjeforbod
 byggjeforskrift
+byggjegrunn
 byggjeklar
 byggjekloss
 byggjekomite
@@ -13539,6 +13555,7 @@ den store, stygge ulven
 den tause majoriteten
 den tid den sorg
 den tredje verda
+den utøvande makta
 den vonde
 den yngre
 den yngre garde
@@ -14268,6 +14285,7 @@ disposisjonsrett
 disputas
 disputere
 disputt
+disruptiv
 diss
 diss-moll
 disse
@@ -16373,6 +16391,7 @@ edrueleg
 edruelegheit
 edruskap
 edruskapsarbeid
+edvardiansk
 eeg
 efemer
 efemeride
@@ -16683,6 +16702,7 @@ ein torn i auget
 ein tru kopi
 ein trykk seksten
 ein tynn ein
+ein vakker dag
 ein viss mann
 ein viss stad
 ein vittig hund
@@ -18927,9 +18947,12 @@ etterstaving
 etterstev
 ettersumar
 ettersyn
+ettersøk
 ettersøke
 ettersøking
 ettersøkje
+ettersøkshund
+ettersøksjakt
 ettersøkt
 ettertanke
 ettertenksam
@@ -21808,6 +21831,7 @@ flakse
 flakskred
 flakstadfjerding
 flambere
+flamboyant
 flamenco
 flamingo
 flamlendar
@@ -23469,6 +23493,7 @@ forhøyr
 forhøyr av tredje grad
 forhøyre
 forhøyre seg
+forhøyrsdomar
 forhøyrsdommar
 forhøyrsmetode
 forhøyrsrett
@@ -23958,6 +23983,8 @@ forretningsverd
 forretningsverksemd
 forrett
 forrette
+forrigle
+forrigling
 forrom
 forrykande
 forråd
@@ -26747,6 +26774,7 @@ fyrspett
 fyrst
 fyrst og fremst
 fyrste
+fyrsteakse
 fyrsteamanuens
 fyrsteamanuensis
 fyrstebetjent
@@ -27628,6 +27656,7 @@ første
 første mai
 første og beste
 første person
+førsteakse
 førsteamanuens
 førsteamanuensis
 førstebetjent
@@ -30808,6 +30837,7 @@ godsvogn
 godt
 godt nytt
 godt og vel
+godt vaksen
 godta
 godtakande
 godtake
@@ -32603,6 +32633,7 @@ guffe
 guffen
 gufs
 gufse
+gugg
 gugge
 guide
 guinea
@@ -32826,7 +32857,6 @@ gust
 guste
 gusten
 gut
-gut som har vaska seg
 gutaktig
 gutane på golvet
 gutane på skogen
@@ -34134,7 +34164,6 @@ halt
 halte
 haltefaen
 haltefan
-haltefanden
 haltepink
 halunk
 halv
@@ -39948,6 +39977,7 @@ i eigen person
 i eigenskap av
 i ein fei
 i ein raus
+i ein ruff
 i ein snupp
 i ein viss fart
 i eininga
@@ -42285,6 +42315,7 @@ innvortes
 innvoven
 innynde
 innåt
+innåtvend
 innøvd
 innøving
 inokulasjon
@@ -43891,6 +43922,8 @@ jorderike
 jordete
 jordfall
 jordfast
+jordfeil
+jordfeilstraum
 jordferd
 jordfeste
 jordfesting
@@ -49296,6 +49329,7 @@ kome i skuggen av
 kome i stand
 kome i stemning
 kome i ulykka
+kome i uvigd jord
 kome i vigd jord
 kome inn i biletet
 kome inn i ei bakevje
@@ -52140,6 +52174,7 @@ krype under fellen
 krype under huda
 kryperom
 krypinn
+kryprom
 krypsiv
 krypskyttar
 krypsoleie
@@ -56509,6 +56544,7 @@ liktale
 liktor
 liktorn
 liktå
+likvake
 likvid
 likvidar
 likvidasjon
@@ -56518,6 +56554,8 @@ likviditet
 likviditetslån
 likviditetsproblem
 likviditetsvanske
+likvoke
+likvòke
 likør
 lilje
 liljefamilie
@@ -74640,7 +74678,7 @@ på grunn av
 på grunnlag av
 på gråten
 på gyngande grunn
-på halv tolv
+på halv [tolv|åtte]
 på halvvegen
 på haustparten
 på haustsida
@@ -85206,6 +85244,7 @@ skjebbe
 skjebne
 skjebnesvanger
 skjede
+skjedekrampe
 skjedekrans
 skjefte
 skjeftegras
@@ -90140,6 +90179,7 @@ som eit piska skinn
 som eit skot
 som eit slakt
 som eit treskjeverk
+som eit uvêr
 som eld i tørt gras
 som eld og vatn
 som faen
@@ -90150,6 +90190,7 @@ som følgje av
 som før
 som hakka møk
 som hand i hanske
+som har vaska seg
 som helst
 som hund og katt
 som i ei skruestikke
@@ -90901,6 +90942,7 @@ spele teater
 spele ut
 spele ut mot
 spele ut over sidelinja
+spele va banque
 speleautomat
 speleavhengig
 speleavhengnad
@@ -109774,11 +109816,18 @@ utvidingsmogelegheit
 utvidingsmoglegheit
 utvidingsplan
 utvidking
+utviklar
 utvikle
+utvikle seg
 utvikling
 utviklings-
 utviklingsarbeid
+utviklingsbistand
+utviklingsdyktig
 utviklingsfase
+utviklingsforstyrring
+utviklingsfremjande
+utviklingsfremmande
 utviklingsgang
 utviklingshemja
 utviklingshemjing
@@ -109790,20 +109839,34 @@ utviklingsline
 utviklingslinje
 utviklingslån
 utviklingslære
+utviklingsmogelegheit
+utviklingsmoglegheit
 utviklingsmønster
+utviklingsnivå
+utviklingsområde
 utviklingsoptimisme
+utviklingsprogram
 utviklingsprosess
 utviklingsprosjekt
+utviklingspsykologi
 utviklingsskatt
 utviklingssteg
 utviklingstakt
 utviklingstempo
+utviklingstrekk
+utviklingstrinn
 utvilsam
+utvinna
+utvinne
 utvinning
+utvinningsløyve
 utvinningstakt
+utvinningstempo
 utvise
 utvising
+utvisingsboks
 utvisingsordre
+utvisingsvedtak
 utviska
 utvitydig
 utvokster
@@ -109817,6 +109880,7 @@ utydleg
 utykke
 utykkje
 utykkje seg med
+utypisk
 utyrme
 utyrst
 utyrste
@@ -109832,7 +109896,6 @@ utømmeleg
 utørst
 utørste
 utøvande
-utøvande makt
 utøvar
 utøve
 utøving
@@ -109845,18 +109908,25 @@ utøymeleg
 uuneleg
 uunngåeleg
 uunnverleg
+uutdanna
+uutforska
 uutgitt
 uutgjeven
 uutgrundeleg
 uuthaldande
 uuthaldeleg
+uutnytta
 uutryddeleg
 uutrydjeleg
 uutseieleg
 uutsletteleg
 uutsliteleg
+uutsprungen
+uuttala
 uuttømmeleg
 uutvikla
+uvaksen
+uvaksinert
 uvan
 uvand
 uvandsleg
@@ -109870,6 +109940,7 @@ uvarsam
 uvarsemd
 uvaska
 uvdøl
+uvederheftig
 uvedkomande
 uvedkommande
 uvega
@@ -109884,7 +109955,11 @@ uvenleg
 uvenn
 uvennleg
 uvennskap
+uvennskapeleg
+uvennskapleg
 uvenskap
+uvenskapeleg
+uvenskapleg
 uventa
 uventande
 uver
@@ -109895,15 +109970,21 @@ uverje
 uverk
 uverkeleg
 uverksam
+uverksemd
 uversbolk
 uversdag
+uversdøger
+uversdøgn
 uversfugl
+uvershimmel
 uversklede
 uverskråke
 uversnatt
 uversplagg
 uversri
+uverssenter
 uverssentrum
+uversskur
 uverssky
 uvesen
 uvesentleg
@@ -109920,6 +110001,7 @@ uvettingskap
 uvettug
 uvettugskap
 uvigd
+uvigsla
 uviktig
 uvildig
 uvilja
@@ -109971,13 +110053,18 @@ uværug
 uvêr
 uvêrsbolk
 uvêrsdag
+uvêrsdøger
+uvêrsdøgn
 uvêrsfugl
+uvêrshimmel
 uvêrsklede
 uvêrskråke
 uvêrsnatt
 uvêrsplagg
 uvêrsri
+uvêrssenter
 uvêrssentrum
+uvêrsskur
 uvêrssky
 uvørde
 uvørden
@@ -109988,11 +110075,13 @@ uynskt
 uånd
 uår
 uåte
+uærbødig
 uærleg
 uærlegdom
 uærlegskap
 uærug
 uærugskap
+uøkonomisk
 uønskt
 uøvd
 v
@@ -110011,8 +110100,10 @@ vadbruk
 vadbåt
 vadderot
 vade
+vadebukse
 vadefot
 vadefugl
+vademekum
 vadestad
 vadestøvel
 vadhorn
@@ -110024,6 +110115,7 @@ vadmålsbrok
 vadmålsbukse
 vadmålsklede
 vadmålskufte
+vadmålsnikkers
 vadmålstrøye
 vadmålsystem
 vadre
@@ -110031,17 +110123,20 @@ vadreleg
 vadren
 vadsekk
 vadstein
+vadsøværing
 vaffel
 vaffelhjarta
 vaffelhjarte
 vaffeljarn
 vaffeljern
 vaffelkake
+vaffelkjeks
 vaffelmønster
 vaffelplate
 vaffelrøre
 vaffelsaum
 vaffelsole
+vaffelsteiking
 vaflete
 vafse
 vag
@@ -110073,8 +110168,10 @@ vakant
 vakar
 vake
 vake over
+vakeeld
 vakekone
 vaken
+vakenatt
 vaker
 vakker
 vakkerbarn
@@ -110085,26 +110182,36 @@ vakkerside
 vakle
 vaklevoren
 vakne
+vakne til liv
 vaksam
 vaksan
 vaksande
+vaksdaling
+vaksdøl
+vaksdøling
 vaksen
 vaksenbillett
 vaksendåp
+vaksenfilm
 vaksenfolk
 vaksengenerasjon
 vaksenkar
 vaksenlitteratur
+vaksenliv
 vaksenopplæring
 vaksenopplæringskurs
+vaksenpoeng
 vaksenundervising
 vaksenundervisning
 vaksinasjon
 vaksinasjonsattest
+vaksinasjonsprogram
 vaksinatør
 vaksine
+vaksinedose
 vaksinemotstandar
 vaksinere
+vaksinering
 vakster
 vakt
 vaktar
@@ -112009,6 +112116,7 @@ vel
 vel blåst
 vel møtt!
 vel og bra
+vel og vakkert
 vel så
 vel så det
 vel å merke
@@ -112622,6 +112730,7 @@ verbrest
 verbrigde
 verbror
 verbstamme
+verbtid
 verbyte
 verd
 verd vekta si i gull
@@ -112804,6 +112913,7 @@ verdsår
 verdsåskoding
 verdsøkonomi
 vere
+vere [uven|uvener] med
 vere avhengig av
 vere behjelpeleg med
 vere berre barnet

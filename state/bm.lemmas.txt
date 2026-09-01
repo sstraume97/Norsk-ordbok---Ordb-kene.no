@@ -954,6 +954,7 @@ U-formet
 U-jern
 U-stål
 U-sving
+U-verdi
 UHF
 URL
 USA-amerikaner
@@ -1145,6 +1146,7 @@ Zr
 [sette|lage] solhylle
 [sette|slå] en strek over
 [sette|spenne] krokfot
+[sette|stikke] spaden i jorda
 [sette|stille] noen i skammekroken
 [sette|stille] saken på hodet
 [sette|stille] sitt lys under en skjeppe
@@ -1433,6 +1435,7 @@ adkomstvei
 adle
 adledd
 adlyde
+adm.
 administrasjon
 administrasjonsbygg
 administrasjonsbygning
@@ -2648,6 +2651,8 @@ anbefalingsskriv
 anbefalingsverdig
 anbringe
 anbringelse
+anbrott
+anbrudd
 anbud
 anbudsfrist
 anbudsinnbydelse
@@ -2703,6 +2708,7 @@ andre
 andre boller
 andre person
 andre verdenskrig
+andreakse
 andreaskors
 andreasmess
 andreasmesse
@@ -3003,6 +3009,7 @@ annekssokn
 annektere
 annektering
 annen
+annenakse
 annendag
 annenfiolin
 annengenerasjon
@@ -4012,6 +4019,7 @@ arveprinsesse
 arverekke
 arverett
 arveskifte
+arvespråk
 arvestoff
 arvestykke
 arvesynd
@@ -5914,6 +5922,7 @@ banehalvdel
 banehogg
 banehugg
 banelegeme
+baneløp
 banemann
 banemannskap
 banemester
@@ -5980,6 +5989,7 @@ bankopplysning
 bankoverføring
 bankpolitikk
 bankran
+bankraner
 bankremisse
 bankrente
 banksjef
@@ -7214,6 +7224,8 @@ berider
 berike
 berike seg
 berikelse
+beriking
+berikning
 beriktige
 beriktigelse
 berkelium
@@ -9322,6 +9334,7 @@ bolle
 bolle seg
 bolledeig
 bollekinn
+bolleklipp
 bollesett
 bolne
 bolsjevik
@@ -9464,8 +9477,12 @@ bonmot
 bonsai
 bonsaitre
 bonus
+bonus-
 bonusbarn
+bonusbarnebarn
+bonusfamilie
 bonusfar
+bonusmamma
 bonusmor
 bonusordning
 bonuspappa
@@ -9479,6 +9496,7 @@ boolsk
 boolsk algebra
 boom
 booster
+bootleg
 boots
 bopel
 boplass
@@ -13243,7 +13261,7 @@ den tause majoritet
 den tid den sorg
 den tredje verden
 den ukjente soldat
-den utøvende makt
+den utøvende makten
 den yngre
 den yngre garde
 den ytterste dag
@@ -13952,6 +13970,7 @@ disposisjonsrett
 disputas
 disputere
 disputt
+disruptiv
 diss
 diss-moll
 disse
@@ -14014,6 +14033,7 @@ distriktsveterinær
 distriktsvis
 distré
 dit
+dit hen
 dit pepperen gror
 ditover
 ditt
@@ -14599,6 +14619,7 @@ drenering
 dreneringsgrøft
 dreneringsrør
 dreng
+drengekammers
 drengestove
 drengestue
 drening
@@ -15801,6 +15822,7 @@ edsavleggelse
 edsavlegging
 edsformular
 edsvoren
+edvardiansk
 eeg
 efemer
 efemeride
@@ -18113,9 +18135,12 @@ etterstev
 etterstrebe
 ettersykdom
 ettersyn
+ettersøk
 ettersøke
 ettersøking
 ettersøkning
+ettersøkshund
+ettersøksjakt
 ettersøkt
 ettertanke
 ettertenksom
@@ -20820,6 +20845,7 @@ flakse
 flakskred
 flakstadfjerding
 flambere
+flamboyant
 flamenco
 flamingo
 flamlender
@@ -22090,6 +22116,7 @@ fordype
 fordype seg
 fordypelse
 fordypelsesfag
+fordypelsesoppgave
 fordyping
 fordypingsfag
 fordypingsoppgave
@@ -23004,6 +23031,8 @@ forrevet
 forrige
 forrige år
 forrigg
+forrigle
+forrigling
 forringe
 forringelse
 forrom
@@ -26160,6 +26189,7 @@ første mai
 første og beste
 første person
 første verdenskrig
+førsteakse
 førsteamanuens
 førsteamanuensis
 førstebetjent
@@ -26488,7 +26518,6 @@ gammalsvensk
 gammaltestamentlig
 gammaltid
 gammaltroende
-gammaltruende
 gammalveg
 gammalvei
 gammalvoren
@@ -26524,7 +26553,6 @@ gammelsvensk
 gammeltestamentlig
 gammeltid
 gammeltroende
-gammeltruende
 gammelveg
 gammelvei
 gammelvoren
@@ -28698,6 +28726,7 @@ godsvogn
 godt
 godt mål
 godt og vel
+godt voksen
 godta
 godtagbar
 godtagelse
@@ -30164,6 +30193,8 @@ guffe på
 guffen
 gufs
 gufse
+gugg
+gugge
 guide
 guinea
 guineaner
@@ -30395,7 +30426,6 @@ gusten
 gut
 gutere
 gutt
-gutt som har vaska seg
 guttaktig
 guttaperka
 gutteaktig
@@ -37619,6 +37649,7 @@ id al-adha
 id al-fitr
 id est
 id-kort
+id-merke
 id-papir
 id-tjuveri
 id-tyveri
@@ -40880,6 +40911,8 @@ jordet
 jordete
 jordfall
 jordfast
+jordfeil
+jordfeilstrøm
 jordferd
 jordfeste
 jordfestelse
@@ -45535,6 +45568,7 @@ komme i skyggen av
 komme i stand
 komme i stemning
 komme i ulykka
+komme i uviet jord
 komme i viet jord
 komme inn i bildet
 komme inn i husvarmen
@@ -47924,6 +47958,7 @@ krype under fellen
 krype under huden
 kryperom
 krypinn
+kryprom
 krypsiv
 krypskytter
 krypsoleie
@@ -51746,6 +51781,7 @@ liktale
 liktor
 liktorn
 liktå
+likvake
 likvid
 likvidasjon
 likvider
@@ -58979,6 +59015,7 @@ nattestengning
 nattesøvn
 nattetid
 nattetime
+nattevaking
 nattevakt
 nattevåk
 nattevåking
@@ -67882,6 +67919,7 @@ psykiatrisk
 psykiatrisk sykehus
 psykisk
 psykisk helsevern
+psykisk utviklingshemmet
 psyko
 psyko-
 psykoanalyse
@@ -68321,7 +68359,7 @@ på grunn av
 på gråten
 på gulvet
 på gyngende grunn
-på halv tolv
+på halv [tolv|åtte]
 på halvveien
 på harde livet
 på havsens bunn
@@ -75470,6 +75508,8 @@ sidlende
 sidlendt
 sidmaga
 sidmaget
+sidmava
+sidmavet
 sidrikke
 sidrumpa
 sidrumpet
@@ -78024,6 +78064,7 @@ skjebnetru
 skjebnetung
 skjede
 skjedehornfamilie
+skjedekrampe
 skjedekrans
 skjeforma
 skjeformet
@@ -81272,6 +81313,7 @@ snedden
 snedig
 snegl
 snegle
+snegle seg
 sneglefart
 sneglehus
 snei
@@ -82036,6 +82078,7 @@ som et pisket skinn
 som et skudd
 som et slakt
 som et treskeverk
+som et uvær
 som faen
 som faen leser Bibelen
 som falt ned fra skyene
@@ -82045,6 +82088,7 @@ som fot i hose
 som følge av
 som før
 som hakka møkk
+som har vaska seg
 som helst
 som hund og katt
 som hånd i hanske
@@ -82726,6 +82770,7 @@ spelljakt
 spellkonsoll
 spellkort
 spellmaskin
+spellselskap
 spelt
 speltbrød
 spencerjakke
@@ -82936,6 +82981,7 @@ spille ut
 spille ut mot
 spille ut over sidelinjen
 spille ut sitt siste kort
+spille va banque
 spilleautomat
 spilleavhengig
 spilleavhengighet
@@ -84689,6 +84735,7 @@ stikning
 stil
 stilart
 stilbedømmelse
+stilbedømming
 stilblanding
 stilbok
 stilbrott
@@ -92831,6 +92878,7 @@ tre av på naturens vegne
 tre i funksjon
 tre i skranken for
 tre inn
+tre inn i de voksnes rekker
 tre sammen
 tre støttende til
 tre tilbake
@@ -97705,6 +97753,7 @@ utasa
 utaskjærs
 utaskjærsvirksomhet
 utast
+utauke
 utause
 utaverden
 utbala
@@ -99060,9 +99109,15 @@ utviding
 utvidingsmulighet
 utvidingsplan
 utvikle
+utvikle seg
+utvikler
 utvikling
 utviklingsalder
+utviklingsarbeid
+utviklingsbistand
 utviklingsdyktig
+utviklingsfase
+utviklingsforstyrrelse
 utviklingsfremmende
 utviklingsgang
 utviklingshemma
@@ -99071,16 +99126,28 @@ utviklingshemming
 utviklingshemning
 utviklingshjelp
 utviklingsland
+utviklingslinje
 utviklingslære
+utviklingsmulighet
+utviklingsmønster
+utviklingsnivå
 utviklingsområde
 utviklingsoptimisme
+utviklingsprogram
+utviklingsprosess
+utviklingsprosjekt
 utviklingspsykologi
+utviklingssteg
+utviklingstrekk
 utviklingstrinn
 utvilsom
 utvinna
 utvinne
 utvinnet
 utvinning
+utvinningstakt
+utvinningstempo
+utvinningstillatelse
 utvirke
 utvise
 utviska
@@ -99088,6 +99155,7 @@ utvisket
 utvisning
 utvisningsboks
 utvisningsordre
+utvisningsvedtak
 utvokst
 utvortes
 utvungen
@@ -99106,6 +99174,7 @@ utålmodig
 utålmodighet
 utånde
 utånding
+utøke
 utømmelig
 utørken
 utørst
@@ -99114,16 +99183,25 @@ utøve
 utøvelse
 utøvende
 utøver
+utøving
 utøy
 utøyla
 utøylet
 uunngåelig
 uunnværlig
+uutdanna
+uutdannet
+uutforska
+uutforsket
+uutgitt
 uutgrunnelig
 uutholdelig
+uutnytta
+uutnyttet
 uutryddelig
 uutsigelig
 uutslettelig
+uutslitelig
 uutslokkelig
 uutslukkelig
 uutsprungen
@@ -99132,11 +99210,17 @@ uuttalt
 uuttømmelig
 uutvikla
 uutviklet
+uvaksinert
 uvane
 uvanlig
 uvant
+uvarig
+uvarlig
+uvarsom
+uvarsomhet
 uvaska
 uvasket
+uvdøl
 uvederheftig
 uvedkommende
 uvegerlig
@@ -99144,6 +99228,7 @@ uvegsam
 uvegsom
 uveisom
 uvel
+uvelhet
 uvelkommen
 uvenn
 uvennlig
@@ -99153,22 +99238,32 @@ uvennskapelig
 uventa
 uventet
 uverdig
+uverge
 uvesen
 uvesentlig
 uvesentlighet
 uvett
 uvette
 uvettig
+uvettighet
 uvetting
+uvia
+uvidd
+uviet
+uvigd
+uvigsla
+uvigslet
 uviktig
 uvilje
 uvilkårlig
+uvillet
 uvillig
 uvillighet
 uvirkelig
 uvirkelighet
 uvirksom
 uvirksomhet
+uvis
 uviselig
 uvislig
 uvisnelig
@@ -99185,16 +99280,25 @@ uvurderlig
 uvæpna
 uvæpnet
 uvær
+uværsbolk
 uværsdag
+uværsdøgn
 uværsfugl
 uværshimmel
+uværsklær
+uværskråke
 uværsnatt
+uværsplagg
+uværsri
+uværssenter
 uværssentrum
+uværsskur
 uværssky
 uvørding
 uvørdnad
 uvørdslig
 uvøren
+uånd
 uåpna
 uåpnet
 uår
@@ -99217,25 +99321,37 @@ vablet
 vablete
 vad
 vadbein
+vadbruk
+vadbåt
 vadderot
 vade
+vadebukse
 vadefot
 vadefugl
 vademekum
 vader
 vadested
 vadestøvel
+vadhorn
 vadmel
 vadmelsbukse
 vadmelsklær
+vadmelskofte
+vadmelsnikkers
+vadmelstrøye
 vadre
 vadsekk
+vadsøværing
 vaffel
 vaffelhjerte
 vaffeljern
+vaffelkake
+vaffelkjeks
 vaffelmønster
 vaffelplate
 vaffelrøre
+vaffelsteiking
+vaffelsteking
 vaffelsåle
 vaffelsøm
 vafle
@@ -99251,6 +99367,8 @@ vagant
 vagantvise
 vagg
 vagge
+vaggestein
+vaghet
 vagina
 vaginal
 vaginisme
@@ -99258,28 +99376,41 @@ vaginitt
 vagl
 vagle
 vagn
+vagvær
 vaid
 vaie
 vaier
+vaierspleis
 vaisenhus
 vak
 vakanse
 vakant
 vake
+vakeild
+vakekone
 vaken
+vakenatt
 vaker
+vaking
 vakker
 vakkermannen
+vakkerside
 vakle
 vaklevoren
 vakne
+vaksdaling
+vaksdøl
+vaksdøling
 vaksinasjon
 vaksinasjonsattest
+vaksinasjonsprogram
 vaksinatør
 vaksine
+vaksinedose
 vaksinemotstander
 vaksinere
 vaksinere seg
+vaksinering
 vakt
 vaktarrest
 vaktavløsing
@@ -99669,6 +99800,7 @@ vannbygging
 vannbygningskunst
 vannbygningsteknikk
 vannbåren
+vannbåret
 vannbærer
 vannbæring
 vannbøffel
@@ -99889,7 +100021,6 @@ vantrivsel
 vantro
 vantroende
 vantru
-vantruende
 vanuatisk
 vanuatuer
 vanvare
@@ -100357,6 +100488,7 @@ vassbygging
 vassbygningskunst
 vassbygningsteknikk
 vassbåren
+vassbåret
 vassbærer
 vassbæring
 vassbøffel
@@ -101151,6 +101283,7 @@ vekstøkonomi
 vekt
 vektanalyse
 vektarm
+vektauking
 vekte
 vektenhet
 vekter
@@ -101185,6 +101318,8 @@ vektsystem
 vekttabell
 vekttall
 vekttap
+vektøking
+vektøkning
 vel
 vel bekomme
 vel blåst
@@ -101663,6 +101798,7 @@ verbalsubstantiv
 verbbøying
 verbbøyning
 verbstamme
+verbtid
 verd
 verdaling
 verdauke
@@ -102161,6 +102297,7 @@ vestretotning
 vestromersk
 vestrøn
 vestside
+vestsydvest
 vestsørvest
 vesttysk
 vesttysker
@@ -103448,10 +103585,16 @@ voksen
 voksenbillett
 voksende
 voksendåp
+voksenfilm
+voksenfolk
+voksengenerasjon
 voksengymnas
+voksenkar
 voksenlitteratur
+voksenliv
 voksenopplæring
 voksenopplæringskurs
+voksenpoeng
 voksenundervisning
 vokseperiode
 voksesmerte
@@ -103820,8 +103963,14 @@ vågsøyværing
 våk
 våke
 våke over
+våkeild
+våkekone
 våken
+våkenatt
+våker
+våking
 våkne
+våkne til liv
 vål
 våle
 vålersokning
@@ -104025,6 +104174,7 @@ værdame
 værdatter
 være
 være [godt|dårlig] skodd
+være [uvenn|uvenner] med
 være av det onde
 være avhengig av
 være bare barnet
@@ -104477,6 +104627,7 @@ wiki
 wild west
 wiltonteppe
 wire
+wirespleis
 wobbler
 wok
 woke
@@ -105818,6 +105969,7 @@ zzz
 østron
 østrus
 østside
+østsydøst
 østsørøst
 østtimoreser
 østtimoresisk
