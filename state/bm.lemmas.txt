@@ -324,6 +324,7 @@
 -øyd
 -øyring
 ... fletta av [noen|noe]
+... og ... , fru Blom
 1. mai-demonstrasjon
 1. mai-tog
 17. mai
@@ -560,6 +561,7 @@ GMT
 GPS
 GPS-mottager
 GPS-mottaker
+GPS-satellitt
 GPS-sender
 GT
 GW
@@ -782,6 +784,7 @@ Nordstjernen
 Norge
 Np
 O
+OCD
 OK
 OL
 Oe
@@ -905,6 +908,7 @@ TG-grammatikk
 TNT
 TS
 TV
+TV-ansikt
 TV-antenne
 TV-apparat
 TV-film
@@ -952,6 +956,8 @@ U-form
 U-forma
 U-formet
 U-jern
+U-landskamp
+U-landslag
 U-stål
 U-sving
 U-verdi
@@ -1027,14 +1033,17 @@ Zr
 [bort i|borti] veggene
 [bort i|borti] været
 [borte|vekk] som en sviske
+[bringe|drive] til tiggerstaven
 [bringe|få] ut av verden
 [bryte|erobre|vinne] nytt land
 [bygge|legge] stein på stein
 [bære|løfte] på gullstol
 [bære|nære] hat til
 [dobbelt|tostavelses] tonelag
+[dra|hale] ut tiden
 [dra|legge] inn årene
 [dra|trekke] i snora
+[dra|trekke] i tvil
 [dra|trekke] ned i søla
 [dra|trekke] stigen opp etter seg
 [drive|dra] det for langt
@@ -1070,6 +1079,7 @@ Zr
 [gjøre|ta] storeslem
 [glatt|sleip] som en ål
 [gli|gå] over i hverandre
+[gripe|ty|ta] til tiggerstaven
 [gyte|helle] olje på ilden
 [gyte|helle] olje på opprørt hav
 [gå|fare] en djevel i
@@ -1107,6 +1117,7 @@ Zr
 [i|på] rad
 [i|på] rekke og rad
 [i|til] en viss grad
+[i|til] rette tid
 [i|under] påsyn av noen
 [jommen|jammen|jaggu] sa jeg smør!
 [kalle|nevne] noe ved dets rette navn
@@ -1114,6 +1125,7 @@ Zr
 [kjempe|slåss] mot vindmøller
 [koble|sette] inn turboen
 [koloss|kjempe] på leirføtter
+[komme|måtte|være] på tiggerstien
 [komme|være] i siget
 [komme|være] på knærne
 [komme|være] på seierspallen
@@ -1121,6 +1133,7 @@ Zr
 [legge|lyse] noe ut på anbud
 [legge|sette] ryggen til
 [legge|snu] godsiden til
+[ligge|stå] tilbake for
 [ligge|være] under torva
 [like|rett] utenfor stuedøra
 [lure|narre] noen opp i stry
@@ -2427,6 +2440,7 @@ alvorsmann
 alvorsord
 alvorsprat
 alvorstung
+alvorstynga
 alvorstynget
 alvpil
 alvskott
@@ -3471,6 +3485,7 @@ appellativ
 appellativisk
 appelldomstol
 appellere
+appellform
 appellfrist
 appellinstans
 appellrett
@@ -7215,6 +7230,8 @@ bergsværing
 bergta
 bergtopp
 bergtroll
+bergtuss
+bergtusse
 bergugle
 bergvegg
 bergverk
@@ -8619,7 +8636,6 @@ bli tatt av dragsuget
 bli til
 bli trengt opp i en krok
 bli truffet av amors piler
-bli tutet ørene fulle med
 bli tørr
 bli var
 bli varm i trøya
@@ -10465,6 +10481,8 @@ bruke, få kjeft
 brukelig
 brukelig pant
 brukelighet
+brukende
+brukendes
 bruker
 brukergrensesnitt
 brukergruppe
@@ -10882,6 +10900,7 @@ budsjettering
 budsjettermin
 budsjettforlik
 budsjettforslag
+budsjettkutt
 budsjettmessig
 budsjettramme
 budsjettår
@@ -12046,6 +12065,7 @@ cellekultur
 cellelære
 cellemembran
 celleplasma
+celleprøve
 cellesaft
 cellestoff
 cellevegg
@@ -12827,6 +12847,7 @@ de små timer
 de store guttene
 de synoptiske evangeliene
 de trygdede
+de tusen hjem
 de tusen sjøers land
 de-
 deadline
@@ -13536,6 +13557,7 @@ det store spørsmålet
 det svake kjønn
 det sympatiske nervesystemet
 det søte liv
+det tapte paradis
 det tredje rike
 det ubevisste
 det var saker
@@ -13945,6 +13967,7 @@ diskusjon
 diskusjonsforum
 diskusjonsgruppe
 diskusjonstema
+diskusjonstråd
 diskutabel
 diskutere
 diskvalifikasjon
@@ -14457,6 +14480,7 @@ dra fordel av
 dra fra
 dra i austerveg
 dra i haug
+dra inn
 dra innpå
 dra kjensel på
 dra krok
@@ -14465,9 +14489,12 @@ dra med i dragsuget
 dra nytte av
 dra omsorg for
 dra pokker i vold
+dra på
 dra på det
+dra på seg
 dra på årene
 dra seg
+dra seg til
 dra sin kos
 dra sitt siste sukk
 dra til
@@ -14970,6 +14997,7 @@ du kan så si
 du slette tid
 du store alpakka
 du store min!
+du store tid
 dualis
 dualisme
 dualist
@@ -17010,6 +17038,7 @@ en lukket bok
 en masse
 en må lære å krype før en kan gå
 en neve stor
+en ny tidsregning
 en og annen
 en passant
 en pest og en plage
@@ -19111,6 +19140,7 @@ fastnagla
 fastnaglet
 fastne
 fastnøkkel
+fastpris
 fastpunkt
 fastrusta
 fastrustet
@@ -19295,6 +19325,7 @@ feilsøking
 feiltagelse
 feiltak
 feiltakelse
+feiltolking
 feiltolkning
 feiltrinn
 feiltrykk
@@ -19345,6 +19376,7 @@ fellah
 felle
 felle av
 felle summariske dommer
+felle tårer over
 felle ut
 fellende
 felles
@@ -19392,6 +19424,7 @@ feltstol
 feltsykehus
 felttog
 feltundersøkelse
+feltundersøking
 feltuniform
 felås
 fem
@@ -21658,6 +21691,7 @@ folkekirke
 folkekjær
 folkekommissær
 folkekommune
+folkekonge
 folkekrav
 folkekultur
 folkekunst
@@ -23859,6 +23893,7 @@ fotballspell
 fotballspeller
 fotballspill
 fotballspiller
+fotballstadion
 fotballstøvel
 fotballsupporter
 fotballtipping
@@ -23992,6 +24027,7 @@ fr.
 fra
 fra A til B
 fra A til Å
+fra alders tid
 fra arilds tid
 fra asken til ilden
 fra barnsbein av
@@ -26031,6 +26067,7 @@ følge den slagne landevei
 følge en til døra
 følge en til graven
 følge med
+følge med i tiden
 følge med på kjøpet
 følge opp
 følge på
@@ -27166,6 +27203,7 @@ genrefilm
 genremaleri
 genremessig
 genreoverskridende
+genretrekk
 genser
 genteknologi
 genterapi
@@ -28057,6 +28095,7 @@ gjømmeleik
 gjømmelek
 gjømmested
 gjømsel
+gjømåned
 gjøn
 gjøne
 gjør-det-selv
@@ -28401,6 +28440,7 @@ glekse
 glemme
 glemme seg
 glemme seg selv
+glemme tid og sted
 glemmebok
 glemsel
 glemselsdrikk
@@ -28864,6 +28904,8 @@ gorrvom
 gospel
 gospelkor
 gospelsang
+gosse
+gosse seg
 goter
 gotikk
 gotisk
@@ -30409,6 +30451,10 @@ guppy
 gurgle
 gurglevann
 gurglevatn
+guri
+guri land
+guri malla
+guri meg
 gurkemeie
 gurkha
 gurkhali
@@ -30787,6 +30833,7 @@ gå surr i
 gå så det griner
 gå så det hviner
 gå så det koster
+gå så det uler
 gå tapt
 gå til
 gå til aksjon
@@ -30825,6 +30872,7 @@ gå under jorda
 gå unna
 gå ut
 gå ut av sitt gode skinn
+gå ut av tiden
 gå ut fra
 gå ut i yrkeslivet
 gå ut med
@@ -31115,6 +31163,7 @@ ha sin rot i
 ha sine fordeler
 ha sine garn ute
 ha sine ord i behold
+ha sine tvil
 ha sitt på det tørre
 ha skarpe kanter
 ha skarpe ører
@@ -33810,6 +33859,7 @@ hevdsrett
 hevdvunnen
 hevdvunnet
 heve
+heve over all tvil
 heve pekefingeren
 heve seg
 heve seg over
@@ -34017,6 +34067,7 @@ histologi
 historie
 historiebok
 historiefilosofi
+historieforfalsking
 historieforfalskning
 historieforsker
 historieforsking
@@ -35117,6 +35168,7 @@ hovedmann
 hovedmengde
 hovedmistenkt
 hovedmotiv
+hovedmynt
 hovedmål
 hovedmåltid
 hovednavn
@@ -35747,6 +35799,7 @@ hutu
 hva
 hva behager?
 hva er greia?
+hva er tids?
 hva for slag?
 hva gir du meg for det?
 hva går det av deg?
@@ -36468,6 +36521,7 @@ hårsløyfe
 hårspenne
 hårspray
 hårstell
+hårstrikk
 hårstrå
 hårstubb
 hårsår
@@ -37421,6 +37475,7 @@ i medhold av
 i mellomtiden
 i meste laget
 i middel
+i min tid
 i mindretall
 i miniatyr
 i minste laget
@@ -37428,6 +37483,7 @@ i minste, største, salteste laget
 i miskreditt
 i morgen
 i morgen den dag
+i morgen tidlig
 i morges
 i motsetning til
 i mørket er alle katter grå
@@ -37554,6 +37610,7 @@ i søvne
 i tablettform
 i tandem
 i teorien
+i tide
 i tide og utide
 i tidens fylde
 i tidligste laget
@@ -37572,6 +37629,7 @@ i tu
 i tukt og ære
 i tur og orden
 i tusen knas
+i tvenne sinn
 i tykt og tynt
 i umiddelbar nærhet
 i underkant av
@@ -37985,7 +38043,6 @@ ikke spytte i glasset
 ikke stort annet
 ikke stort over
 ikke strekke seg lenger enn skinnfellen rekker
-ikke suge av eget bryst
 ikke så farlig
 ikke så verst
 ikke ta et nei for et nei
@@ -38051,6 +38108,7 @@ ikke-sosialistisk
 ikke-spredning
 ikke-statlig
 ikke-stridende
+ikke-tellelig
 ikke-tema
 ikke-troende
 ikke-vestlig
@@ -38689,6 +38747,7 @@ ingenlunde
 ingenmannsland
 ingensteds
 ingenting
+ingenting å tape
 ingenue
 ingrediens
 ingress
@@ -39200,6 +39259,7 @@ innlåsing
 innlåsingstjuveri
 innlåsingstyveri
 innlåst
+innlærer
 innlæring
 innlæringsevne
 innlæringsprosess
@@ -41530,6 +41590,7 @@ kalamitet
 kalander
 kalandrere
 kalas
+kalasform
 kalasjnikov
 kalasnederlag
 kalasseier
@@ -42216,6 +42277,7 @@ karakal
 karakter
 karakterbok
 karakterdannende
+karakterdrag
 karakterdrap
 karakteregenskap
 karakterfast
@@ -43770,6 +43832,7 @@ kjønnsdel
 kjønnsdelt
 kjønnsdiskriminering
 kjønnsdrift
+kjønnsdysfori
 kjønnsforskjell
 kjønnshormon
 kjønnshår
@@ -44809,6 +44872,7 @@ knebukse
 knebøy
 knebøyd
 knebøyet
+knebøying
 knebøyning
 knedjup
 knedyp
@@ -45152,6 +45216,7 @@ kodebrikke
 kodeks
 kodelås
 kodenavn
+kodenøkkel
 kodeord
 koder
 kodeskjema
@@ -45593,7 +45658,6 @@ komme på hælene
 komme på kant med
 komme på rett hylle
 komme på tapetet
-komme på tiggerstien
 komme på vingene
 komme rekende på en fjøl
 komme seg
@@ -48666,6 +48730,7 @@ kurpenger
 kurr
 kurre
 kurs
+kursauking
 kursdeltager
 kursdeltaker
 kurse
@@ -48687,11 +48752,13 @@ kursorisk
 kursorisk pensum
 kursplan
 kurssenter
+kursstiging
 kursstigning
 kurssvingning
 kurstap
 kursted
 kurstilbud
+kursøking
 kursøkning
 kurtasje
 kurtisane
@@ -49161,6 +49228,7 @@ kvinnerøst
 kvinnesak
 kvinnesakskvinne
 kvinnesaksmann
+kvinnesal
 kvinneside
 kvinnestemme
 kvinnesterk
@@ -49551,6 +49619,7 @@ la seg merke med
 la seile sin egen sjø
 la skitten gro
 la stå ved sitt verd
+la tvilen komme tiltalte til gode
 la vente på seg
 la være
 la-skure-mentalitet
@@ -51075,6 +51144,7 @@ lekre
 lekre seg
 lekse
 leksefri
+lekselesing
 lekselesning
 leksikalsk
 leksikograf
@@ -51615,7 +51685,6 @@ ligge under
 ligge under for
 ligge åpent i dagen
 ligge øde
-ligge, stå tilbake for noen, i noe
 liggedag
 ligger
 liggesete
@@ -51741,6 +51810,7 @@ likhet
 likhetspunkt
 likhetstanke
 likhetstegn
+likhetstrekk
 likhund
 likhus
 likkapell
@@ -55041,8 +55111,6 @@ massevis
 masseødeleggelse
 masseødeleggelsesmiddel
 masseødeleggelsesvåpen
-masseødelegging
-masseøydelegging
 massiv
 massør
 massøse
@@ -55423,6 +55491,7 @@ medbestemmende
 medboer
 medborger
 medbrakt
+medbringe
 medbuer
 medbør
 meddele
@@ -55912,6 +55981,7 @@ memorandum
 memorere
 memorial
 men
+men, men
 menarche
 menarke
 menasjeri
@@ -56997,6 +57067,7 @@ mistilpassa
 mistilpasset
 mistilpassing
 mistolke
+mistolking
 mistolkning
 mistrives
 mistrivsel
@@ -57311,6 +57382,7 @@ molukkisk
 molybden
 moment
 momentan
+momentum
 momp
 mompe
 moms
@@ -58114,6 +58186,7 @@ museunge
 museøre
 musgrå
 musikal
+musikalartist
 musikalier
 musikalitet
 musikalsk
@@ -58446,6 +58519,7 @@ mållinje
 målløs
 målmann
 målmerke
+måloppnåelse
 målreising
 målretta
 målrettet
@@ -59011,6 +59085,7 @@ natteravn
 nattergal
 nattero
 natters tider
+nattestenging
 nattestengning
 nattesøvn
 nattetid
@@ -59055,6 +59130,7 @@ nattseif
 nattside
 nattskift
 nattsommerfugl
+nattstenging
 nattstengning
 nattstått
 nattsvart
@@ -59242,6 +59318,7 @@ navngivning
 navngjeten
 navnkristen
 navnkundig
+navnkunnig
 navnlaus
 navnlig
 navnløs
@@ -59357,6 +59434,7 @@ nedetter
 nedfall
 nedfallsfrukt
 nedfart
+nedfellbar
 nedfelle
 nedfelle seg
 nedfor
@@ -60360,6 +60438,7 @@ notisbok
 notlag
 notodding
 notorisk
+notoritet
 notsteng
 notting
 nottung
@@ -60425,6 +60504,8 @@ nullpunkt
 nullskatteyter
 nullskattyter
 nullstille
+nullsumspell
+nullsumspill
 nullvekst
 nulte
 nulte time
@@ -61504,6 +61585,7 @@ oljefilm
 oljefilter
 oljefond
 oljeforekomst
+oljeforurensing
 oljeforurensning
 oljefrø
 oljefunn
@@ -61803,6 +61885,7 @@ omskaping
 omskifte
 omskiftelig
 omskiftelse
+omskiftende
 omskifting
 omskiftning
 omskjære
@@ -63013,6 +63096,7 @@ orienteringsfag
 orienteringsløp
 orienteringsløper
 orienteringsmøte
+orienteringssans
 orienteringsskriv
 orienteringssport
 origami
@@ -63113,7 +63197,9 @@ ortografi
 ortografisk
 ortoped
 ortopedi
+ortopediingeniør
 ortopedisk
+ortoptist
 ortoreksi
 ortose
 orv
@@ -64093,6 +64179,7 @@ panteautomat
 pantebok
 pantebrev
 pantegjeld
+pantegods
 panteisme
 panteist
 panteistisk
@@ -65550,6 +65637,7 @@ pistolhylster
 pistolløp
 pistolmunning
 pistolskjefte
+pistolskott
 pistolskudd
 pistong
 pistre
@@ -66182,6 +66270,7 @@ politisk fange
 politisk geografi
 politisk korrekt
 politisk selvmord
+politisk ukorrekt
 politiskilt
 politistasjon
 politistasjonsdistrikt
@@ -68402,6 +68491,7 @@ på landsplan
 på lang lei
 på lang sikt
 på lang vei
+på lange tider
 på langs
 på langt nær
 på leit
@@ -68516,6 +68606,7 @@ på tull
 på tuppene
 på tverke
 på tverre
+på tvers
 på tynn is
 på tå hev
 på tørre nevene
@@ -68999,6 +69090,7 @@ rakettangrep
 rakettbase
 rakettdrevet
 rakettfart
+rakettforsker
 rakettforsvar
 rakettkaster
 rakettmotor
@@ -69761,6 +69853,7 @@ regularitet
 regulativ
 regulativlønn
 regulator
+regulatorisk
 regulerbar
 regulere
 regulering
@@ -69846,6 +69939,7 @@ reise sak mot
 reise seg
 reise seg av asken
 reise sin vei
+reise tvil
 reise-TV
 reise-tv
 reiseapotek
@@ -70032,6 +70126,7 @@ relegere
 relestasjon
 relevans
 relevant
+reliabilitet
 relieff
 relieffkart
 religion
@@ -70504,6 +70599,7 @@ rett og slett
 rett opp og ned
 rett skal være rett
 rett som det var
+rett tid
 rett-tenkende
 rett-tenkt
 rett-tidig
@@ -70933,6 +71029,7 @@ rimfrost
 riming
 rimlag
 rimlagt
+rimmønster
 rimord
 rimsmed
 rimtuss
@@ -71291,6 +71388,7 @@ romteleskop
 romtemperatur
 romtent
 romvekt
+romvesen
 romvirkning
 romvær
 rondell
@@ -74295,6 +74393,7 @@ sellelære
 sellemembran
 sellende
 selleplasma
+selleprøve
 selleri
 sellerirot
 selleristang
@@ -74420,8 +74519,11 @@ selveste
 selvfinansierende
 selvfinansiering
 selvforakt
+selvfordjuping
+selvfordjupning
 selvfordypelse
 selvfordyping
+selvfordypning
 selvforglemmende
 selvforherligelse
 selvforklarende
@@ -75256,6 +75358,7 @@ sette strek
 sette tennene i
 sette til livs
 sette til side
+sette tilbake
 sette tommeskruen på
 sette trut
 sette tæring etter næring
@@ -75632,6 +75735,7 @@ sikkerhetscelle
 sikkerhetsfond
 sikkerhetsforanstaltning
 sikkerhetsforskrift
+sikkerhetsgaranti
 sikkerhetshvelv
 sikkerhetsklarere
 sikkerhetsklarering
@@ -75880,6 +75984,7 @@ simultanparti
 simultantolk
 simultantolke
 simultantolking
+simultantolkning
 sin
 sin vane tro
 sinder
@@ -76282,6 +76387,7 @@ sjangerfilm
 sjangermaleri
 sjangermessig
 sjangeroverskridende
+sjangertrekk
 sjanghaie
 sjangle
 sjanglet
@@ -76753,8 +76859,11 @@ sjølfinansierende
 sjølfinansiering
 sjølfolk
 sjølforakt
+sjølfordjuping
+sjølfordjupning
 sjølfordypelse
 sjølfordyping
+sjølfordypning
 sjølforglemmende
 sjølforherligelse
 sjølforklarende
@@ -77830,6 +77939,7 @@ skinnkåpe
 skinnlapp
 skinnlue
 skinnløsning
+skinnløysing
 skinnmager
 skinnmanøver
 skinnpung
@@ -79805,6 +79915,7 @@ slagen
 slager
 slagerparade
 slagertekst
+slaget er tapt
 slagfast
 slagferdig
 slagg
@@ -80499,6 +80610,7 @@ slå hånden av noen
 slå i bordet
 slå i hartkorn med
 slå i hjel
+slå i hjel tiden
 slå i hjel tiden med
 slå i miss
 slå ild
@@ -80714,6 +80826,7 @@ smed
 smede
 smededikt
 smedeskrift
+smedfinger
 smedlære
 smegma
 smeik
@@ -81461,6 +81574,7 @@ snodig
 snok
 snoke
 snoker
+snooker
 snop
 snope
 snope bort, vekk
@@ -82696,6 +82810,7 @@ speilskrift
 speilvende
 speilvendt
 speisa
+speiset
 speke
 spekeflesk
 spekekjøtt
@@ -82802,6 +82917,9 @@ spenningsfilm
 spenningsforfatter
 spenningsforhold
 spenningsfylt
+spenningshodepine
+spenningshodeverk
+spenningskurve
 spenningslitteratur
 spenningsmoment
 spenningsmåler
@@ -84924,6 +85042,7 @@ stjerne i [boka|margen]
 stjerneanis
 stjernebilde
 stjerneblom
+stjernedyrkelse
 stjernedyrking
 stjerneeksempel
 stjerneform
@@ -85192,6 +85311,7 @@ storme
 storme fram
 storme rundt
 stormektig
+stormende
 stormester
 stormflo
 stormfugl
@@ -85309,6 +85429,7 @@ stradivarius
 straff
 straff med individualpreventiv virkning
 straff-fange
+straff-forfølgelse
 straff-forfølging
 straff-forfølgning
 straff-fri
@@ -85327,6 +85448,7 @@ straffedom
 straffedømme
 straffeeksersis
 straffefelt
+straffeforfølgelse
 straffeforfølging
 straffeforfølgning
 straffekast
@@ -85351,6 +85473,7 @@ straffesparkkonkurranse
 straffetale
 straffetiltak
 straffeutmåling
+strafforfølgelse
 strafforfølging
 strafforfølgning
 straffri
@@ -86593,6 +86716,7 @@ suffragette
 sufisme
 sug
 suge
+suge av eget bryst
 suge på karamellen
 suge på labben
 suge ut
@@ -87476,6 +87600,7 @@ svulne
 svulst
 svulstig
 svulstighet
+svunnen tid
 svupp
 svuppe
 svær
@@ -88046,6 +88171,7 @@ så som
 så som så
 så til
 så til de grader
+så tvil om
 så vel som
 så vidt
 så vidt båten bar
@@ -88775,6 +88901,7 @@ ta tabbe på
 ta telling
 ta tempen
 ta temperaturen
+ta tiden
 ta tiden til hjelp
 ta til
 ta til beins
@@ -88918,6 +89045,7 @@ takgrind
 takhalm
 takhatt
 takhelling
+takhelning
 takhøgde
 takhøyde
 takimellom
@@ -89718,6 +89846,7 @@ tegneseriealbum
 tegneserieblad
 tegneseriehefte
 tegneserieroman
+tegneseriestripe
 tegneskole
 tegnestift
 tegnetime
@@ -90108,6 +90237,7 @@ temporær
 temposkifte
 temposterk
 temposvak
+temposykling
 tempotrening
 tempus
 tempusform
@@ -90253,6 +90383,7 @@ teppefall
 teppeflis
 teppeflise
 teppegulv
+teppelagt
 teppelegge
 teppelegger
 teppepyton
@@ -90631,91 +90762,172 @@ tibetansk
 tibeto-burmansk
 tid
 tidbolk
+tidbøying
+tidbøyning
+tidebønn
 tidel
 tidels
+tidelt
 tiden leger alle sår
 tidende
+tidenes morgen
 tidens tann
 tidevann
 tidevannsbelte
 tidevannsbølge
 tidevannsforskjell
+tidevannskraftverk
 tidevannsstrøm
 tideverv
 tidfeste
+tidfesting
 tidig
+tidkort
 tidkrevende
 tidlaus
 tidlig
 tidlig moderne tid
 tidlig ultralyd
+tidligblomstrende
+tidligbær
 tidligdags
+tidligeple
 tidliggrønnsak
+tidligkristen
+tidligkål
+tidligpensjon
 tidligpotet
+tidligsort
+tidligvakt
 tidlås
 tidløs
+tidløshet
 tidobbel
 tidobbelt
 tidoble
 tids
 tidsadverb
+tidsakse
+tidsaktuell
 tidsalder
 tidsangivelse
+tidsaspekt
+tidsavgrensa
+tidsavgrenset
+tidsavgrensing
+tidsavgrensning
+tidsavsnitt
 tidsbefraktning
 tidsbegrensing
 tidsbegrensning
 tidsbegrep
 tidsbesparende
 tidsbestemme
+tidsbestemmelse
+tidsbestemt
+tidsbilde
+tidsbombe
+tidsbruk
 tidsbryter
 tidsbundet
+tidsbøying
+tidsbøyning
+tidscerteparti
+tidsdeling
+tidsdifferanse
+tidsdimensjon
+tidsenhet
+tidsepoke
 tidsfaktor
+tidsfenomen
 tidsfordriv
+tidsforhold
 tidsforskjell
+tidsfrakt
 tidsfrist
+tidsfølelse
 tidsfølge
+tidsgrense
+tidshorisont
+tidsinndeling
 tidsinnstille
+tidsinnstilt
+tidsintervall
+tidsjamning
+tidsjevning
+tidskapsel
 tidsklemme
 tidskoloritt
 tidskonjunksjon
+tidskonstant
 tidskonto
+tidskrav
 tidskrevende
+tidslinje
+tidslås
+tidslønn
 tidsmaskin
 tidsmessig
+tidsmoment
+tidsmåler
 tidsnok
+tidsnormering
 tidsnød
 tidsoptimist
+tidsperiode
+tidsperspektiv
 tidsplan
+tidspreg
+tidsprega
+tidspreget
 tidspress
 tidspunkt
 tidsramme
+tidsreferanse
 tidsregning
+tidsreise
 tidsriktig
 tidsrom
 tidssetning
 tidssignal
 tidsskifte
+tidsskildring
+tidsskille
 tidsskjema
 tidsskrift
 tidssone
 tidssparende
+tidssparing
+tidsspenn
 tidsspille
+tidsspørsmål
+tidsstraff
 tidsstudie
-tidsstudium
+tidssubjunksjon
+tidstap
+tidstavle
+tidstjuv
 tidstypisk
+tidstyv
+tidsvindu
+tidsvitne
 tidsånd
 tidtager
+tidtaing
 tidtaker
+tidtaking
 tidtrøyte
 tidvass-strøm
 tidvassbelte
 tidvassbølge
 tidvassforskjell
+tidvasskraftverk
 tidvasstrøm
 tidvatn
 tidvatnbelte
 tidvatnbølge
 tidvatnforskjell
+tidvatnkraftverk
 tidvatnstrøm
 tidvis
 tie
@@ -90729,10 +90941,12 @@ tiendeklassing
 tieplikt
 tier
 tifold
+tifoldig
 tifotkreps
 tigang
 tiger
 tigerhai
+tigerreke
 tigersoleie
 tigersprang
 tigerstad
@@ -90753,14 +90967,20 @@ tiing
 tik
 tikamp
 tikant
+tikilometer
 tikjemper
 tikk
 tikk takk
 tikke
+tikke inn
 tikkende bombe
+tikle
 tikrone
 tikronemynt
+tikroner
+tikroneseddel
 tikroning
+tikse
 tiksotrop
 tiksotropi
 tiksotropisk
@@ -90772,6 +90992,7 @@ til [unytte|unyttes]
 til all lykke
 til all ulykke
 til alle døgnets tider
+til alle tider
 til alt hell
 til alt overmål
 til beins
@@ -90850,6 +91071,7 @@ til støls
 til tider
 til tross
 til tross for
+til tusen
 til uka
 til vanlig
 til å begynne med
@@ -90862,12 +91084,14 @@ tilbake i folden
 tilbake i manesjen
 tilbake til scratch
 tilbakebetale
+tilbakebetaling
 tilbakebetalingsmetode
 tilbakeblikk
 tilbakefall
 tilbakeføre
 tilbakegang
 tilbakeholden
+tilbakeholdende
 tilbakeholdenhet
 tilbakeholdsrett
 tilbakekalle
@@ -90876,42 +91100,55 @@ tilbakekobling
 tilbakekomst
 tilbakekopling
 tilbakelegge
+tilbakelent
 tilbakeliggende
 tilbakeliggenhet
+tilbakemating
 tilbakemelding
+tilbakereise
+tilbakeskritt
 tilbakeslag
 tilbakeslagsventil
 tilbakespell
 tilbakespill
+tilbakesteg
 tilbakestående
 tilbaketog
 tilbaketrekking
 tilbaketrekning
 tilbaketrukket
 tilbaketur
+tilbakeveg
+tilbakevei
 tilbakevendende
 tilbakevending
 tilbakevirkende
 tilbakevise
 tilbe
+tilbedelse
 tilbeder
 tilbehør
 tilberede
 tilberedelse
 tilberedning
 tilblivelse
+tilblivelseshistorie
 tilbliving
 tilbringe
 tilbringer
 tilbringerbuss
 tilbringertjeneste
 tilbud
+tilbudsannonse
 tilbudspris
+tilbudsside
 tilbudsvare
 tilby
 tilby seg
 tilbyder
 tilbygg
+tilbygging
+tilbygning
 tilbørlig
 tilbøyelig
 tilbøyelighet
@@ -91368,6 +91605,7 @@ time
 time for time
 time ut og time inn
 timeavtale
+timebestilling
 timebetaling
 timebu
 timecharter
@@ -91384,6 +91622,7 @@ timelønnet
 timelønt
 timeout
 timeplan
+timepris
 timer
 times
 timesats
@@ -91402,6 +91641,7 @@ timoresisk
 timotei
 tind
 tinde
+tindebestigelse
 tindebestiger
 tindebestigning
 tinder
@@ -91432,6 +91672,7 @@ tinglag
 tinglese
 tinglig
 tingliggjøre
+tingliggjøring
 tinglyse
 tinglysing
 tinglysning
@@ -91455,6 +91696,7 @@ tinnfolie
 tinning
 tinningbein
 tinningben
+tinninglapp
 tinnitus
 tinnsoldat
 tinntallerken
@@ -91503,6 +91745,8 @@ tiramisu
 tiriltunge
 tirre
 tirsdag
+tirsdagskveld
+tirsdagsmorgen
 tirsdagsnatt
 tiske
 tiske og hviske i krokene
@@ -91517,6 +91761,7 @@ tisse på seg
 tisse seg ut
 tissefant
 tissemann
+tissepause
 tissetrengt
 tistel
 tistret
@@ -91552,9 +91797,11 @@ titteldikt
 tittelforsvarer
 tittelkamp
 tittelkutt
+tittellåt
 tittelnovelle
 tittelrolle
 tittelside
+tittelspor
 titter
 titteskap
 titting
@@ -91576,6 +91823,7 @@ tiårs
 tiårsalder
 tiårsdag
 tiårsjubileum
+tiårsperiode
 tiæring
 tiøre
 tiøres
@@ -91649,6 +91897,7 @@ tjenesteyrke
 tjenesteytelse
 tjenesteytende
 tjenesteytende næring
+tjenesteyting
 tjenlig
 tjenstdyktig
 tjenstgjøre
@@ -92150,6 +92399,7 @@ tonnkilometer
 tonsill
 tonsillitt
 tonsur
+tonus
 topartisystem
 topas
 topasfarga
@@ -92290,6 +92540,7 @@ torpedo
 torpedobåt
 torpedojager
 torper
+torre
 torsdag
 torsdagskveld
 torsdagsmorgen
@@ -94514,6 +94765,8 @@ turt
 turtall
 turteldue
 turteller
+turterreng
+turvant
 turve
 turveg
 turvei
@@ -94529,10 +94782,13 @@ tusendel
 tusendels
 tusener
 tusenfold
+tusenfoldig
 tusenfryd
 tusengyllen
 tusenkrone
+tusenkronersspørsmål
 tusenkroneseddel
+tusenkroning
 tusenkunstner
 tusenlapp
 tusentall
@@ -94543,6 +94799,7 @@ tusenår
 tusenårig
 tusenårs
 tusenårsrike
+tusenårsskifte
 tusj
 tusje
 tusjere
@@ -94550,6 +94807,7 @@ tusjpenn
 tusjtavle
 tusjtegning
 tuske
+tuske til seg
 tusken
 tusket
 tuskete
@@ -94565,10 +94823,19 @@ tussebitt
 tusseflette
 tussefløyte
 tussefolk
+tussefugl
+tussegutt
+tussejente
+tussekall
+tussekjerring
+tussekjøring
 tusseladd
+tusselus
+tussemerke
 tusseskap
 tusset
 tussete
+tussig
 tussing
 tussmørk
 tussmørke
@@ -94578,27 +94845,34 @@ tusten
 tustet
 tustete
 tut
+tut og kjør
 tute
 tute med de ulver som er ute
+tute med ulvene
 tute ørene fulle med
 tutekanne
 tutekar
+tutekopp
 tutel
 tutkanne
 tutkar
+tutkopp
 tutle
 tutlet
 tutlete
+tutling
 tutor
 tutsi
 tutt
 tutti
 tuttifrutti
 tuttifruttismak
+tuttiparti
 tutu
 tuvaler
 tuvalsk
 tv
+tv-ansikt
 tv-antenne
 tv-apparat
 tv-film
@@ -94628,24 +94902,39 @@ tvangløs
 tvangsakkord
 tvangsarbeid
 tvangsauksjon
+tvangsauksjonere
+tvangsavståelse
+tvangsavståing
+tvangsbruk
 tvangsdirigere
+tvangsflytte
 tvangsfore
 tvangsforestilling
 tvangsfullbyrdelse
 tvangsfullbyrding
 tvangsfôre
+tvangsgifte
 tvangshandling
 tvangsinnlegge
 tvangsinnleggelse
 tvangsinnlegging
 tvangskartell
+tvangslidelse
 tvangslån
+tvangsmiddel
 tvangsmulkt
 tvangsneurose
 tvangsnevrose
+tvangsreturnere
+tvangssalg
+tvangssituasjon
+tvangssolgt
 tvangssparing
 tvangstanke
+tvangstiltak
+tvangstrekk
 tvangstrøye
+tvangsutsende
 tvare
 tve-
 tvebitt
@@ -94656,43 +94945,67 @@ tvedele
 tvedrakt
 tveegga
 tveegget
+tveegget sverd
 tvekamp
 tvekjønna
 tvekjønnet
 tvekroket
 tvekrokete
 tvelyd
+tvenn
 tverke
 tverr
 tverr-
+tverrband
 tverrbjelke
+tverrbratt
+tverrbånd
 tverrdal
 tverrdriver
 tverre
+tverrende
 tverrfaglig
 tverrfløyte
+tverrforbindelse
 tverrgate
 tverrgående
 tverrkast
+tverrkrok
+tverrkulturell
 tverrligger
 tverrmål
 tverrplattfot
 tverrpolitisk
 tverrpomp
+tverrsal
+tverrsamband
+tverrside
 tverrskip
 tverrskips
+tverrslag
 tverrsnitt
 tverrsnu
+tverrstang
 tverrstanse
 tverrstille
+tverrstilt
+tverrstokk
+tverrstopp
+tverrstoppe
+tverrstrek
 tverrstripet
 tverrstripete
 tverrstripete muskulatur
 tverrsum
+tverrtre
 tverrved
+tverrveg
+tverrvegg
+tverrvei
 tverrvende
 tverrvitenskapelig
 tvers
+tvers av
 tvers gjennom
 tvers over
 tversgående
@@ -94701,6 +95014,7 @@ tvert
 tvert imot
 tvert om
 tvert over
+tveskjeggveronika
 tvetann
 tvett
 tvette
@@ -94708,6 +95022,8 @@ tvetydig
 tvi
 tvi vøre
 tvi-
+tviband
+tvibandvott
 tvibrent
 tviholde
 tvikroket
@@ -95162,6 +95478,7 @@ tømmerdoning
 tømmerdrift
 tømmerflåte
 tømmerfløter
+tømmerfløting
 tømmerfløtning
 tømmerfløyter
 tømmerfløyting
@@ -95448,6 +95765,7 @@ uavgrensa
 uavgrenset
 uavhendelig
 uavhengig
+uavhengig av
 uavhengighet
 uavhengighetserklæring
 uavhengighetskamp
@@ -95819,6 +96137,8 @@ uforutsigbar
 uforutsigbarhet
 uforutsigelig
 uforvarende
+uforventa
+uforventet
 ufrakommelig
 uframkommelig
 ufravendt
@@ -96095,16 +96415,25 @@ uklippa
 uklippet
 uklipt
 uklok
+ukløvd
+ukløyvd
 uknuselig
+ukokt
 ukollegial
+ukomfortabel
+ukomplisert
+ukonsentrert
 ukontrollerbar
 ukontrollert
+ukontroversiell
 ukonvensjonell
+ukoordinert
 ukorrekt
 ukoselig
 ukrainer
 ukrainsk
 ukrenkelig
+ukrenkelighet
 ukring
 ukristelig
 ukritisk
@@ -96112,6 +96441,7 @@ ukrona
 ukronet
 ukront
 ukrutt
+ukrutt forgår ikke så lett
 ukrydra
 ukrydret
 ukuelig
@@ -96127,6 +96457,7 @@ ukvass
 ukvemsord
 ukvinnelig
 ukyndig
+ukyndighet
 ukyssa
 ukysset
 ukysst
@@ -96141,13 +96472,18 @@ ulaglig
 ulaseggjørlig
 ulastelig
 ule
+uledig
+ulefossing
 ulegelig
+ulegemlig
 uleilig
 uleilige
 uleilighet
+ulekker
 ulempe
 ulempeerstatning
 ulempelig
+ulempevederlag
 ulende
 ulendt
 ulenkelig
@@ -96155,37 +96491,78 @@ uleselig
 uleska
 ulesket
 ulest
+ulevd
 ulevelig
 ulidelig
 ulik
 ulike
 ulike tall
+ulikefinnet
 ulikefinnete
 ulikhet
 ulikskap
+uling
 ulivssår
 ulk
 ulke
+ulkefamilie
 ulkefisk
 ull
 ull-longs
 ull-lus
 ullape
+ullblanding
+ullbukse
+ulldott
 ullen
 ullfett
+ullgarn
 ullgenser
+ullgrå
+ullhvit
 ullhår
+ulljakke
+ulljumper
+ullkarde
+ullkjole
+ullklut
+ullklær
+ullkorg
+ullkurv
+ullkvit
+ullkåpe
 ullmus
 ullongs
+ullplagg
+ullpledd
+ullprogram
 ullrotte
+ullsjal
+ullskaut
+ullskjerf
+ullskjorte
+ullsky
+ullsokk
+ullsokning
+ullspinneri
+ullstakk
+ullstillongs
+ullstoff
+ullstrikk
 ullstrømpe
 ullteppe
+ulltråd
+ulltrøye
+ulltøy
+ullundertøy
 ullurt
 ullus
 ullvare
 ullvarefabrikk
 ullvoks
+ullvott
 ulme
+ulmebrann
 ulne
 ulogisk
 ulov
@@ -96396,6 +96773,7 @@ under pari
 under pisken
 under seil
 under tak
+under tvil
 under tøffelen
 under vesten
 under åpen himmel
@@ -99761,6 +100139,8 @@ vankelmodig
 vankundig
 vankundighet
 vankunne
+vankunnig
+vankunnighet
 vanlagnad
 vanlig
 vanlig flertall
@@ -100128,8 +100508,10 @@ varevogn
 varfamilie
 varg
 varg i veum
+vargeham
 vargehi
 vargehyl
+vargham
 varghi
 varghyl
 vargskinn
@@ -101988,6 +102370,7 @@ verken
 verken fugl eller fisk
 verken før eller siden
 verken vått eller tørt
+verken … eller …
 verkenskjole
 verkenstøy
 verketå
