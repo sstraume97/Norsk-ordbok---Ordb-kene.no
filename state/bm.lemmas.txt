@@ -15985,6 +15985,7 @@ egyptisk bomull
 egyptisk mørke
 egyptolog
 egyptologi
+eh
 ei
 ei halv ei
 ei heller
@@ -16059,6 +16060,7 @@ eigenmektig
 eigenmelding
 eigennavn
 eigennytte
+eigennyttig
 eigenomsorg
 eigenproduksjon
 eigenprodusert
@@ -17328,6 +17330,7 @@ enigmatisk
 ening
 enjambement
 enke
+enkedronning
 enkel
 enkel konsonant
 enkelhet
@@ -46076,6 +46079,7 @@ kongekroning
 kongelig
 kongelosje
 kongemakt
+kongemor
 kongen på haugen
 kongenavn
 kongenial
@@ -58915,6 +58919,8 @@ nanopartikkel
 nanosekund
 nanoteknologi
 nansenpass
+naoerisk
+naoeroer
 napalm
 napalmbombe
 napoleonskake
@@ -59249,8 +59255,6 @@ nauende
 naufin
 naugod
 nauild
-naurisk
-nauruer
 naust
 naustdøl
 naustdøling
@@ -62558,6 +62562,7 @@ opprettelse
 oppretter
 opprettholde
 oppretting
+oppreven
 opprevet
 oppriktig
 oppriktig talt
@@ -86876,6 +86881,7 @@ sundmage
 sundmann
 sundmave
 sundpenger
+sundreven
 sundrevet
 sundsokning
 sunn
@@ -105852,6 +105858,7 @@ zzz
 åvokster
 æ
 ægide
+æh
 ær
 æra
 ærbar
@@ -105992,6 +105999,7 @@ zzz
 ødslig
 ødsling
 øgle
+øh
 øk
 øke
 øke på

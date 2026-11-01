@@ -16170,8 +16170,6 @@ dødsstraff
 dødsstøyt
 dødssynd
 dødstal
-dødstill
-dødstille
 dødstrugsel
 dødstrussel
 dødstrøytt
@@ -18163,6 +18161,7 @@ enigma
 enigmatisk
 enjambement
 enke
+enkedronning
 enkel
 enkel konsonant
 enkelbekkasin
@@ -18241,6 +18240,7 @@ enkepensjon
 enket
 enkje
 enkje seg
+enkjedronning
 enkjemann
 enkjemannspensjon
 enkjemannsstøyt
@@ -56907,6 +56907,7 @@ litteraturkritikk
 litteraturmeldar
 litteraturmål
 litteraturspråk
+litteraturvetar
 litteraturvitar
 litteraturvitskap
 litterær
@@ -64478,6 +64479,8 @@ nanopartikkel
 nanosekund
 nanoteknologi
 nansenpass
+naoerisk
+naoeroar
 napalm
 napalmbombe
 napoleonskake
@@ -64951,8 +64954,6 @@ naudvarme
 naudven
 naudverje
 naukre
-naurisk
-nauruar
 naust
 naustdøl
 naustdøling
@@ -98739,6 +98740,7 @@ teaterstykke
 teaterverd
 teaterverksemd
 teaterverkstad
+teatervetar
 teatervitar
 teatervitjing
 teatervitskap
@@ -106072,6 +106074,7 @@ uavgjord
 uavgrensa
 uavhendeleg
 uavhengig
+uavhengig av
 uavklara
 uavklart
 uavklåra
@@ -117463,6 +117466,7 @@ zzz
 åvokster
 æ
 ægide
+æh
 æle
 ær
 æra
@@ -117613,6 +117617,7 @@ zzz
 ødipalkonflikt
 ødipuskompleks
 øgle
+øh
 øko-
 økobalanse
 økobonde
